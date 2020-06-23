@@ -1,0 +1,35 @@
+include: '.checkmarx.yml'
+
+stages:
+  - checkmarx scan
+  - build
+  - test
+  - staging
+
+Checkmarx:
+  stage: checkmarx scan
+  only:
+    - master
+    - merge_requests
+  extends: .cx-scan
+  
+build_src:
+  stage: build
+  script: echo 'building'
+  only:
+    - master
+    - merge_requests
+
+test_app:
+  stage: test
+  script: echo 'testing'
+  only:
+    - master
+    - merge_requests
+
+deploy:
+  stage: staging
+  script: echo 'deploying'
+  only:
+    - master
+    - merge_requests
