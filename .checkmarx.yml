@@ -1,0 +1,24 @@
+image: docker:latest
+services:
+  - docker:dind
+
+.cx-scan:
+  stage: checkmarx scan
+  image:
+    name: docker.io/checkmarxts/cxflow
+    entrypoint: ['']
+  script:
+    - cat ${CX_FLOW_CONFIG} > application.yml
+    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml 
+        --scan 
+        --cx-team="${CHECKMARX_TEAM}"
+        --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" 
+        --app="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" 
+        --cx-flow.break-build=false 
+        --f=. 
+    - mv *.zip cx.zip
+  artifacts:
+    reports:
+      sast: gl-sast-report.json
+    paths:
+      - cx.zip
