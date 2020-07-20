@@ -15,7 +15,6 @@ services:
         --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" 
         --app="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" 
         --cx-flow.break-build=false
-        --app="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}"
         --f=. 
     - mv *.zip cx.zip
   artifacts:
