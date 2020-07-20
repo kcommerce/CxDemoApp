@@ -5,7 +5,7 @@ services:
 .checkmarx_sast:
   stage: test
   image:
-    name: docker.io/checkmarx/cx-flow
+    name: checkmarxts/cxflow:1.6.4
     entrypoint: ['']
   script:
     - cat ${CX_FLOW_CONFIG} > application.yml
@@ -15,9 +15,7 @@ services:
         --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" 
         --app="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" 
         --cx-flow.break-build=false
-        --namespace="${CI_PROJECT_ROOT_NAMESPACE}"
-        --repo-url="${CI_REPOSITORY_URL}"
-        --branch="${CI_COMMIT_REF_NAME}" 
+        --app="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}"
         --f=. 
     - mv *.zip cx.zip
   artifacts:
