@@ -19,9 +19,9 @@ services:
         --repo="${CI_PROJECT_NAME}"
         --branch="${CI_COMMIT_REF_NAME}"
         --f=. 
-    - mv *.zip cx.zip
   artifacts:
     reports:
       sast: gl-sast-report.json
     paths:
-      - cx.zip
+      - gl-sast-report.json
+
