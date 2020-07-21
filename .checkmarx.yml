@@ -5,7 +5,7 @@ services:
 .checkmarx_sast:
   stage: test
   image:
-    name: checkmarxts/cxflow:1.6.4
+    name: docker.io/checkmarx/cx-flow
     entrypoint: ['']
   script:
     - cat ${CX_FLOW_CONFIG} > application.yml
