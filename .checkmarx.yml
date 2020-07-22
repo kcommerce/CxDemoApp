@@ -9,10 +9,8 @@ services:
     entrypoint: ['']
   script:
     - cat ${CX_FLOW_CONFIG} > application.yml
-    if [$CI_PIPELINE_SOURCE == "merge_request_event"]; then 
-      echo "JAMES"
-    else
-      echo "NAMITA"
+    - if []; then 
+    - if [ $CI_PIPELINE_SOURCE == "merge_request_event" ]; then echo "MREGE REQUEST"; fi;
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml 
         --scan 
         --cx-team="${CHECKMARX_TEAM}"
