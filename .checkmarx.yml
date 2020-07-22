@@ -11,22 +11,22 @@ services:
     - cat ${CX_FLOW_CONFIG} > application.yml
     - >
       if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then 
-        java -jar /app/cx-flow.jar --spring.config.location=./application.yml;
-          --scan;
-          --cx-team="${CHECKMARX_TEAM}";
-          --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}";
-          --app="${CI_PROJECT_NAME}";
-          --project-id=${CI_PROJECT_ID};
-          --merge-id=${CI_MERGE_REQUEST_IID};
-          --bug-tracker=GITLABMERGE;
+        java -jar /app/cx-flow.jar --spring.config.location=./application.yml
+          --scan
+          --cx-team="${CHECKMARX_TEAM}"
+          --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}"
+          --app="${CI_PROJECT_NAME}"
+          --project-id=${CI_PROJECT_ID}
+          --merge-id=${CI_MERGE_REQUEST_IID}
+          --bug-tracker=GITLABMERGE
           --f=.
       else
-        java -jar /app/cx-flow.jar --spring.config.location=./application.yml;
-          --scan;
-          --cx-team="${CHECKMARX_TEAM}";
-          --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}";
-          --app="${CI_PROJECT_NAME}";
-          --f=.
+        java -jar /app/cx-flow.jar --spring.config.location=./application.yml
+          "--scan
+          --cx-team="${CHECKMARX_TEAM}"
+          --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}"
+          --app="${CI_PROJECT_NAME}"
+          --f=."
       fi
     - >
       if [ "$CI_COMMIT_REF_NAME" == "master" ]; then 
