@@ -19,6 +19,7 @@ services:
           --project-id=${CI_PROJECT_ID} \
           --merge-id=${CI_MERGE_REQUEST_IID} \
           --bug-tracker=GITLABMERGE \
+          --cx-flow.break-build=false \
           --f=.
       else
         java -jar /app/cx-flow.jar --spring.config.location=./application.yml \
@@ -26,6 +27,7 @@ services:
           --cx-team="${CHECKMARX_TEAM}" \
           --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" \
           --app="${CI_PROJECT_NAME}" \
+          --cx-flow.break-build=false \
           --f=.
       fi
     - |
@@ -33,6 +35,7 @@ services:
         echo "master"; 
       fi
   artifacts:
+    when: on_success
     reports:
       sast: gl-sast-report.json
     paths:
