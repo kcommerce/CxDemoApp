@@ -19,14 +19,14 @@ services:
           --project-id=${CI_PROJECT_ID}
           --merge-id=${CI_MERGE_REQUEST_IID}
           --bug-tracker=GITLABMERGE
-          --f=.; 
+          --f=.
       else
         java -jar /app/cx-flow.jar --spring.config.location=./application.yml
           --scan 
           --cx-team="${CHECKMARX_TEAM}"
           --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" 
           --app="${CI_PROJECT_NAME}"
-          --f=.; 
+          --f=.
       fi
     - >
       if [ "$CI_COMMIT_REF_NAME" == "master" ]; then 
