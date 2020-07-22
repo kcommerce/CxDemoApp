@@ -12,7 +12,10 @@ services:
       if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then 
         BUG_TRACKER="GITLABMERGE"; 
       fi
-    - if [ "$CI_COMMIT_REF_NAME" == "master" ]; then echo "master"; fi
+    - >
+      if [ "$CI_COMMIT_REF_NAME" == "master" ]; then 
+        echo "master"; 
+      fi
     - cat ${CX_FLOW_CONFIG} > application.yml
 
 
