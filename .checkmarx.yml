@@ -30,10 +30,6 @@ services:
           --cx-flow.break-build=false \
           --f=.
       fi
-    - |
-      if [ "$CI_COMMIT_REF_NAME" == "master" ]; then 
-        echo "master"; 
-      fi
   artifacts:
     when: on_success
     reports:
