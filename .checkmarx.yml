@@ -10,7 +10,9 @@ services:
   script:
     - cat ${CX_FLOW_CONFIG} > application.yml
     - if []; then 
-    - if [ $CI_PIPELINE_SOURCE == "merge_request_event" ]; then echo "MREGE REQUEST"; fi;
+    - if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then echo "MREGE REQUEST"; fi
+    - if [ "$CI_COMMIT_REF_NAME" == "master" ]; then echo "master"; fi
+
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml 
         --scan 
         --cx-team="${CHECKMARX_TEAM}"
