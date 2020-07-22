@@ -8,9 +8,13 @@ services:
     name: docker.io/checkmarxts/cxflow:1.6.4
     entrypoint: ['']
   script:
-    - cat ${CX_FLOW_CONFIG} > application.yml
-    - if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then BUG_TRACKER="GITLABMERGE"; fi
+    - >
+      if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then 
+        BUG_TRACKER="GITLABMERGE"; 
+      fi
     - if [ "$CI_COMMIT_REF_NAME" == "master" ]; then echo "master"; fi
+    - cat ${CX_FLOW_CONFIG} > application.yml
+
 
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml 
         --scan 
