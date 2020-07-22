@@ -8,28 +8,30 @@ services:
     name: docker.io/checkmarxts/cxflow:1.6.4
     entrypoint: ['']
   script:
+    - cat ${CX_FLOW_CONFIG} > application.yml
     - >
       if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then 
-        BUG_TRACKER="GITLABMERGE"; 
+        java -jar /app/cx-flow.jar --spring.config.location=./application.yml 
+          --scan 
+          --cx-team="${CHECKMARX_TEAM}"
+          --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" 
+          --app="${CI_PROJECT_NAME}"
+          --project-id=${CI_PROJECT_ID}
+          --merge-id=${CI_MERGE_REQUEST_IID}
+          --bug-tracker=GITLABMERGE
+          --f=.; 
+      else
+        java -jar /app/cx-flow.jar --spring.config.location=./application.yml
+          --scan 
+          --cx-team="${CHECKMARX_TEAM}"
+          --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" 
+          --app="${CI_PROJECT_NAME}"
+          --f=.; 
       fi
     - >
       if [ "$CI_COMMIT_REF_NAME" == "master" ]; then 
         echo "master"; 
       fi
-    - cat ${CX_FLOW_CONFIG} > application.yml
-
-
-    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml 
-        --scan 
-        --cx-team="${CHECKMARX_TEAM}"
-        --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" 
-        --cx-flow.break-build=false
-        --app="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}"
-        --namespace="${CI_PROJECT_ROOT_NAMESPACE}"
-        --repo="${CI_PROJECT_NAME}"
-        --branch="${CI_COMMIT_REF_NAME}"
-        --bug-tracker=${BUG_TRACKER}
-        --f=. 
   artifacts:
     reports:
       sast: gl-sast-report.json
