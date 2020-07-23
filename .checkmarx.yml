@@ -26,7 +26,7 @@ services:
           --scan \
           --cx-team="${CHECKMARX_TEAM}" \
           --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" \
-          --app="${CI_PROJECT_NAME}" \
+          --app="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" \
           --cx-flow.break-build=false \
           --f=.
       fi
