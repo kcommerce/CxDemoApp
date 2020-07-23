@@ -27,6 +27,9 @@ services:
           --cx-team="${CHECKMARX_TEAM}" \
           --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" \
           --app="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" \
+          --branch="${CI_COMMIT_REF_NAME}" \
+          --repo-name="${CI_PROJECT_NAME}" \
+          --namespace="${CI_PROJECT_NAMESPACE}" \
           --cx-flow.break-build=false \
           --f=.
       fi
