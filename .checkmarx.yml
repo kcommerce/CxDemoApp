@@ -18,6 +18,7 @@ services:
           --app="${CI_PROJECT_NAME}" \
           --project-id=${CI_PROJECT_ID} \
           --merge-id=${CI_MERGE_REQUEST_IID} \
+          --bug-tracker=GITLABMERGE \
           --cx-flow.break-build=false \
           --f=.
       else
