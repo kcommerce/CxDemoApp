@@ -1,11 +1,16 @@
-include: '.checkmarx.yml'
+#include: '.checkmarx.yml'
+include: 
+  - remote: 'https://gitlab.com/jbrotsos/checkmarx/-/blob/master/.checkmarx-template.yml'
 
+variables:
+  INCREMENTAL: "true"
+  
 stages:
   - test
 
-checkmarx_sast:
-  stage: test
-  only:
-    - master
-    - merge_requests
-  extends: .checkmarx_sast
+#checkmarx_sast:
+#  stage: test
+#  only:
+#    - master
+#    - merge_requests
+#  extends: .checkmarx_sast
