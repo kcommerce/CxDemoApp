@@ -1,6 +1,6 @@
 #include: '.checkmarx.yml'
 include: 
-  - remote: 'https://gitlab.com/jbrotsos/checkmarx/-/blob/master/.checkmarx-template.yml'
+  - remote: 'https://gitlab.com/jbrotsos/checkmarx/raw/master/.checkmarx-template.yml'
 
 variables:
   INCREMENTAL: "true"
