@@ -3,7 +3,7 @@ include:
   - remote: 'https://gitlab.com/jbrotsos/checkmarx/raw/master/.checkmarx-template.yml'
 
 variables:
-  INCREMENTAL: "TRUE"
+  INCREMENTAL: "true"
   
 stages:
   - test
