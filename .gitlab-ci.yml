@@ -2,8 +2,8 @@
 include: 
   - remote: 'https://gitlab.com/jbrotsos/checkmarx/raw/master/.checkmarx-template.yml'
 
-variables:
-  INCREMENTAL: "true"
+#variables:
+#  INCREMENTAL: "true"
   
 stages:
   - test
