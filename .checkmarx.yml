@@ -11,7 +11,7 @@ services:
     - cat ${CX_FLOW_CONFIG} > application.yml
     - |
       if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then 
-        java -Dhttp.proxyHost=144.91.82.190 -Dhttp.proxyPort=3129 -jar /app/cx-flow.jar --spring.config.location=./application.yml \
+        java -jar /app/cx-flow.jar --spring.config.location=./application.yml \
           --scan \
           --cx-team="${CHECKMARX_TEAM}" \
           --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" \
@@ -22,7 +22,7 @@ services:
           --cx-flow.break-build=false \
           --f=.
       else
-        java -Dhttp.proxyHost=144.91.82.190 -Dhttp.proxyPort=3128 -jar /app/cx-flow.jar --spring.config.location=./application.yml \
+        java -Dhttp.proxySet=true -Dhttp.proxyHost=144.91.82.190 -Dhttp.proxyPort=3128 -jar /app/cx-flow.jar --spring.config.location=./application.yml \
           --scan \
           --cx-team="${CHECKMARX_TEAM}" \
           --cx-project="${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}" \
