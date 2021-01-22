@@ -1,6 +1,6 @@
 #include: '.checkmarx.yml'
 include: 
-  - remote: 'https://github.com/checkmarx-ltd/cx-flow/blob/master/src/main/resources/samples/gitlab-config.yml?raw=true'
+  - remote: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/master/src/main/resources/samples/gitlab-config.yml'
 
 variables:
   INCREMENTAL: "true"
