@@ -6,5 +6,5 @@ include: '.checkmarx.yml'
 variables:
   INCREMENTAL: "true"
   
-#stages:
-#  - test
+stages:
+  - test
