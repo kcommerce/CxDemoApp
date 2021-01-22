@@ -1,6 +1,6 @@
-#include: '.checkmarx.yml'
-include: 
-  - remote: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/master/src/main/resources/samples/gitlab-config.yml'
+include: '.checkmarx-template.yml'
+#include: 
+#  - remote: '.check'
 #  - remote: 
 
 variables:
