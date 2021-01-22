@@ -1,6 +1,6 @@
-include: '.checkmarx.yml'
-#include: '.checkmarx-template.yml'
-#  - remote: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/master/src/main/resources/samples/gitlab-config.yml'
+#include: '.checkmarx.yml'
+include: 
+  - remote: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/master/src/main/resources/samples/gitlab-config.yml'
 #  - remote: 
 
 variables:
@@ -8,3 +8,6 @@ variables:
   
 stages:
   - test
+
+todo_job:
+  stage: test
