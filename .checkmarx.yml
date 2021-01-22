@@ -2,7 +2,10 @@ image: docker:latest
 services:
   - docker:dind
 
-.checkmarx_sast:
+stages:
+  - test
+
+.checkmarx_scan:
   stage: test
   image:
     name: docker.io/checkmarx/cx-flow
