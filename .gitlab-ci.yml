@@ -6,5 +6,5 @@ include:
 variables:
   INCREMENTAL: "true"
   
-#stages:
-#  - test
+stages:
+  - test
