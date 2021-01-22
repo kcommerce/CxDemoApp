@@ -6,4 +6,4 @@ variables:
   INCREMENTAL: "true"
   
 stages:
-  - test
+  - scan
