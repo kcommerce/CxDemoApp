@@ -1,9 +1,10 @@
-include: #'.checkmarx-template.yml'
+include: '.checkmarx.yml'
+#include: #'.checkmarx-template.yml'
 #include: 
-  - remote: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/Checkmarx.gitlab-ci.yml'
+#  - remote: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/Checkmarx.gitlab-ci.yml'
 
-variables:
-  INCREMENTAL: "true"
+#variables:
+#  INCREMENTAL: "true"
   
 stages:
   - test
