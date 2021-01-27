@@ -15,4 +15,4 @@ checkmarx_scan:
     - master
     - merge_requests
   extends:
-    .checkmarx_sast
+    .checkmarx_scan
