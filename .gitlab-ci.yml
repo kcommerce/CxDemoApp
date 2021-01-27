@@ -9,7 +9,7 @@ include: '.checkmarx.yml'
 stages:
   - test
 
-checkmarx_sast:
+checkmarx_scan:
   stage: test
   only:
     - master
