@@ -9,7 +9,10 @@ include: '.checkmarx.yml'
 stages:
   - test
 
-todo_job:
+checkmarx_sast:
   stage: test
-  script:
-    - echo 'hello world'
+  only:
+    - master
+    - merge_requests
+  extends:
+    .checkmarx_sast
