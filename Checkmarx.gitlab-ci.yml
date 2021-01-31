@@ -42,7 +42,6 @@ cx-scan:
 
   artifacts:
      rules:
-      if: '$CX_FLOW_BUG_TRACKER == "GitLabDashboard"
       when: on_success
       reports:
        sast: gl-sast-report.json
