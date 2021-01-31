@@ -28,7 +28,8 @@ cx-scan:
     name: checkmarx/cx-flow
     entrypoint: ['']
   script:
-    - ${CX_FLOW_EXE}
+    - cat ${CX_FLOW_CONFIG} > application.yml
+    - ${CX_FLOW_EXE} --spring.config=./application.yml 
           --scan 
           --app="${APP}" 
           --namespace="${NAMESPACE}" 
@@ -60,7 +61,8 @@ cx-scan-mr:
     name: checkmarx/cx-flow
     entrypoint: ['']
   script:
-    - ${CX_FLOW_EXE}
+    - cat ${CX_FLOW_CONFIG} > application.yml
+    - ${CX_FLOW_EXE} --spring.config=./application.yml
           --scan 
           --app="${APP}" 
           --namespace="${NAMESPACE}" 
