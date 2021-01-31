@@ -14,16 +14,13 @@ variables:
     GITLAB_ERROR_MERGE: "false"
     PARAMS: ""
 
-stages:
-  - scan
-
 cx-scan:
-  stage: scan
+  stage: test
   only:
     - master
   variables:
-      CX_FLOW_BUG_TRACKER: GitLabDashboard
-      CX_FLOW_BUG_TRACKER_IMPL: GitLabDashboard
+      CX_FLOW_BUG_TRACKER: GitLab
+      CX_FLOW_BUG_TRACKER_IMPL: GitLab
   image:
     name: checkmarx/cx-flow
     entrypoint: ['']
@@ -52,7 +49,7 @@ cx-scan:
 
 
 cx-scan-mr:
-  stage: scan
+  stage: test
   only:
     - merge_requests
   variables:
