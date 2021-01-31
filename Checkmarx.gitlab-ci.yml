@@ -41,12 +41,11 @@ cx-scan:
           ${PARAMS}
 
   artifacts:
-     rules:
-      when: on_success
-      reports:
-       sast: gl-sast-report.json
-      paths:
-       - gl-sast-report.json
+    when: on_success
+    reports:
+      sast: gl-sast-report.json
+    paths:
+      - gl-sast-report.json
 
 
 cx-scan-mr:
