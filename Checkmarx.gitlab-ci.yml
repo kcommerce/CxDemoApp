@@ -15,10 +15,10 @@ variables:
     PARAMS: ""
 
 stages:
-  - test
+  - scan
 
-.checkmarx-scan:
-  stage: test
+cx-scan:
+  stage: scan
   only:
     - master
   variables:
@@ -49,8 +49,8 @@ stages:
        - gl-sast-report.json
 
 
-.checkmarx-scan-mr:
-  stage: test
+cx-scan-mr:
+  stage: scan
   only:
     - merge_requests
   variables:
