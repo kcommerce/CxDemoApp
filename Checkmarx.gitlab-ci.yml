@@ -1,5 +1,4 @@
 variables:
-    CX_FLOW_EXE: "java -jar /app/cx-flow.jar --spring.config=./application.yml"
     CHECKMARX_INCREMENTAL: "false"
     CX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"
     APP: $CI_PROJECT_NAME
@@ -26,7 +25,7 @@ cx-scan:
     entrypoint: ['']
   script:
     - cat ${CX_FLOW_CONFIG} > application.yml
-    - ${CX_FLOW_EXE}  
+    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
           --scan 
           --app="${APP}" 
           --namespace="${NAMESPACE}" 
@@ -60,7 +59,7 @@ cx-scan-mr:
     entrypoint: ['']
   script:
     - cat ${CX_FLOW_CONFIG} > application.yml
-    - ${CX_FLOW_EXE}
+    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
           --scan 
           --app="${APP}" 
           --namespace="${NAMESPACE}" 
