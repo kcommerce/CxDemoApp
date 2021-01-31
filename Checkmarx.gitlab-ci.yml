@@ -1,5 +1,6 @@
 variables:
     CHECKMARX_INCREMENTAL: "false"
+    CHECKMARX_PRESET: "High and Medium"
     CX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"
     APP: $CI_PROJECT_NAME
     NAMESPACE: $CI_PROJECT_NAMESPACE
@@ -40,10 +41,12 @@ cx-scan:
           ${PARAMS}
 
   artifacts:
-     when: on_success
-     reports:
+     rules:
+      if: '$CX_FLOW_BUG_TRACKER == "GitLabDashboard"
+      when: on_success
+      reports:
        sast: gl-sast-report.json
-     paths:
+      paths:
        - gl-sast-report.json
 
 
