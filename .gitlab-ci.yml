@@ -6,21 +6,3 @@ include:
 checkmarx-scan:
   variables:
     CHECKMARX_PRESET: "OWASP TOP 10 - 2017"
-
-checkmarx-scan-mr:
-  variables:
-    CHECKMARX_PRESET: "OWASP TOP 10 - 2017"
-
-#variables:
-#  INCREMENTAL: "true"
-  
-#stages:
-#  - test
-
-#checkmarx_scan:
-#  stage: test
-#  only:
-#    - master
-#    - merge_requests
-#  extends:
-#    .checkmarx_scan
