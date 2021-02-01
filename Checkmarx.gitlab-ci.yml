@@ -22,7 +22,7 @@ variables:
     GITLAB_ERROR_MERGE: "false"
     PARAMS: ""
 
-cx-scan:
+checkmarx-scan:
   stage: test
   only:
     - master
@@ -61,7 +61,7 @@ cx-scan:
       - gl-sast-report.json
 
 
-cx-scan-mr:
+checkmarx-scan-mr:
   stage: test
   only:
     - merge_requests
