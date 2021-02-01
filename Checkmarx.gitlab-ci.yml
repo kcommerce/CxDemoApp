@@ -32,11 +32,11 @@ checkmarx-scan:
     - |
       echo "Before script"
       if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
-        export CX_BUG_TRACKER="GITLABMERGE"
+        export CX_FLOW_BUG_TRACKER="GITLABMERGE"
         echo "This is a merge request"
       fi
   script:
-    - echo "JPB = " $CX_BUG_TRACKER
+    - echo "JPB = " $CX_FLOW_BUG_TRACKER
     - cat ${CX_FLOW_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
           --scan 
@@ -47,7 +47,7 @@ checkmarx-scan:
           --cx-team="${CX_TEAM}" 
           --cx-project="${CX_PROJECT}" 
           --branch="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}"
-          --bug-tracker="${CX_BUG_TRACKER}"
+          --bug-tracker="${CX_FLOW_BUG_TRACKER}"
           --preset="${CHECKMARX_PRESET}"
           --severity="${CHECKMARX_SEVERITY}"
           --cwe="${CHECKMARX_CWE}"
