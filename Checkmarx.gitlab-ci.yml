@@ -1,6 +1,6 @@
 variables:
-    CX_BUG_TRACKER: "GitLab"
-    CX_BUG_TRACKER_IMPL: "GitLab"
+    CX_FLOW_BUG_TRACKER: "GitLab"
+    CX_FLOW_BUG_TRACKER_IMPL: "GitLab"
     CX_EXCLUDE_FILES: ""
     CX_EXCLUDE_FOLDERS: ".git/"
     CHECKMARX_SEVERITY: "High"
@@ -57,7 +57,7 @@ checkmarx-scan:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" 
       variables:
-        CX_BUG_TRACKER: GITLABMERGE
+        CX_FLOW_BUG_TRACKER: GITLABMERGE
     #- if: $CX_BUG_TRACKER == "GitLabDashboard"
     #  artifacts:
     #    when: on_success
