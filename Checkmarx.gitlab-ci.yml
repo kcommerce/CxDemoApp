@@ -54,6 +54,8 @@ variables:
 
 checkmarx-scan:
   extends: .checkmarx-scan
+  only:
+    - master
 
 checkmarx-scan-mr:
   extends: .checkmarx-scan
