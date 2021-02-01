@@ -59,7 +59,7 @@ checkmarx-scan-mr:
   extends: .checkmarx-scan
   only:
     - merge_requests
-  variable:
+  variables:
     CX_BUG_TRACKER: GITLABMERGE
 
 
