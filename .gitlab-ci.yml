@@ -3,6 +3,14 @@
 include: 
   - remote: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/Checkmarx.gitlab-ci.yml'
 
+checkmarx-scan:
+  variables:
+    CHECKMARX_PRESET: "OWASP TOP 10 - 2017"
+
+checkmarx-scan-mr:
+  variables:
+    CHECKMARX_PRESET: "OWASP TOP 10 - 2017"
+
 #variables:
 #  INCREMENTAL: "true"
   
