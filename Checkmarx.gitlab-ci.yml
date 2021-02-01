@@ -48,7 +48,7 @@ variables:
           --exclude-folders="$CX_EXCLUDE_FOLDERS"
           --project-id="${CI_PROJECT_ID}" 
           --merge-id="${CI_MERGE_REQUEST_IID}" 
-          --spring.profiles.active="${CX_FLOW_ENABLED_VULNERABILITY_SCANNERS}" 
+          --spring.profiles.active="${CX_ENABLED_VULNERABILITY_SCANNERS}" 
           --f=. 
           ${PARAMS} 
 
