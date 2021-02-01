@@ -23,12 +23,20 @@ variables:
     GITLAB_ERROR_MERGE: "false"
     PARAMS: ""                                # list of additional parameters (i.e. )
 
-.checkmarx-scan:
+checkmarx-scan:
   stage: test
   image:   
     name: checkmarx/cx-flow
     entrypoint: ['']
+  before_script:
+    - |
+      echo "Before script"
+      if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
+        export CX_BUG_TRACKER="GITLABMERGE"
+        echo "This is a merge request"
+      fi
   script:
+    - echo "JPB = " $CX_BUG_TRACKER
     - cat ${CX_FLOW_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
           --scan 
@@ -52,13 +60,3 @@ variables:
           --spring.profiles.active="${CX_ENABLED_VULNERABILITY_SCANNERS}" 
           --f=. 
           ${PARAMS} 
-
-checkmarx-scan:
-  extends: .checkmarx-scan
-  before_script:
-    - |
-      echo "Before script"
-      if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
-        export CX_BUG_TRACKER="GITLABMERGE"
-        echo "This is a merge request"
-      fi
