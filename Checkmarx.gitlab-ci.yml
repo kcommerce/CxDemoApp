@@ -1,6 +1,12 @@
 variables:
-    CX_FLOW_BUG_TRACKER: $BUG_TRACKER
-    CX_FLOW_BUG_TRACKER_IMPL: $BUG_TRACKER
+    CX_FLOW_BUG_TRACKER: $CX_BUG_TRACKER
+    CX_FLOW_BUG_TRACKER_IMPL: $CX_BUG_TRACKER
+    CX_EXCLUDE_FILES: ""
+    CX_EXCLUDE_FOLDERS: ".git/"
+    CHECKMARX_SEVERITY: "High"
+    CHECKMARX_CATEGORY: ""
+    CHECKMARX_CWE: ""
+    CHECKMARX_STATUS: ""
     CHECKMARX_INCREMENTAL: "false"
     CHECKMARX_PRESET: "High and Medium"
     CX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"
@@ -36,6 +42,13 @@ cx-scan:
           --cx-team="${CX_TEAM}" 
           --cx-project="${CX_PROJECT}" 
           --branch="${BRANCH}"
+          --bug-tracker="$BUG_TRACKER"
+          --severity="$CHECKMARX_SEVERITY"
+          --category="$CHECKMARX_CATEGORY"
+          --status="$CHECKMARX_STATUS"
+          --cwe="$CHECKMARX_CWE"
+          --exclude-files="$CX_EXCLUDE_FILES"
+          --exclude-folders="$CX_EXCLUDE_FOLDERS"
           --spring.profiles.active="${CX_FLOW_ENABLED_VULNERABILITY_SCANNERS}" 
           --f=. 
           ${PARAMS}
@@ -70,6 +83,12 @@ cx-scan-mr:
           --branch="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}"
           --bug-tracker=GITLABMERGE
           --preset="${CHECKMARX_PRESET}"
+          --severity="$CHECKMARX_SEVERITY"
+          --cwe="$CHECKMARX_CWE"
+          --category="$CHECKMARX_CATEGORY"
+          --status="$CHECKMARX_STATUS"
+          --exclude-files="$CX_EXCLUDE_FILES"
+          --exclude-folders="$CX_EXCLUDE_FOLDERS"
           --project-id="${CI_PROJECT_ID}" 
           --merge-id="${CI_MERGE_REQUEST_IID}" 
           --spring.profiles.active="${CX_FLOW_ENABLED_VULNERABILITY_SCANNERS}" 
