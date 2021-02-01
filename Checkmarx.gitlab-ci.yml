@@ -54,15 +54,12 @@ variables:
 
 checkmarx-scan:
   extends: .checkmarx-scan
-  only:
-    - master
+  before_script:
+    - |
+      if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
+        export CX_BUG_TRACKER="GITLABMERGE"
+      fi
 
-checkmarx-scan-mr:
-  extends: .checkmarx-scan
-  only:
-    - merge_requests
-  variables:
-    CX_BUG_TRACKER: GITLABMERGE
 
 
 
