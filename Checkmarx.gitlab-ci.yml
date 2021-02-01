@@ -54,9 +54,6 @@ variables:
 
 checkmarx-scan:
   extends: .checkmarx-scan
-  stage: test
-  only:
-    - master
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" 
       variables:
