@@ -6,3 +6,4 @@ include:
 checkmarx-scan:
   variables:
     CHECKMARX_PRESET: "OWASP TOP 10 - 2017"
+    CX_ENABLED_VULNERABILITY_SCANNERS: sast, sca
