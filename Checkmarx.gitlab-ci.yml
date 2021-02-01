@@ -38,7 +38,7 @@ variables:
           --cx-team="${CX_TEAM}" 
           --cx-project="${CX_PROJECT}" 
           --branch="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}"
-          --bug-tracker="$CX_BUG_TRACKER"
+          --bug-tracker="${CX_BUG_TRACKER}"
           --preset="${CHECKMARX_PRESET}"
           --severity="${CHECKMARX_SEVERITY}"
           --cwe="${CHECKMARX_CWE}"
