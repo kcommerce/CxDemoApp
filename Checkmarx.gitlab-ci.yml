@@ -37,6 +37,7 @@ checkmarx-scan:
         export CX_FLOW_BUG_TRACKER="GITLABMERGE"
       fi
   script:
+    - echo ${CX_FLOW_BUG_TRACKER}
     - cat ${CX_FLOW_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
           --scan 
