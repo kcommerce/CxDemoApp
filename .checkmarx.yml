@@ -8,7 +8,7 @@ stages:
 .checkmarx_scan:
   stage: test
   image:
-    name: docker.io/checkmarx/cx-flow
+    name: docker.io/checkmarx/cx-flow:a32abf4
     entrypoint: ['']
   script:
     - cat ${CX_FLOW_CONFIG} > application.yml
