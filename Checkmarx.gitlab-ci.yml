@@ -23,7 +23,7 @@ variables:
     PARAMS: ""
 
 .checkmarx-scan:
-  state: test
+  stage: test
   image:   
     name: checkmarx/cx-flow
     entrypoint: ['']
