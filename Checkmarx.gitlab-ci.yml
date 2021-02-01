@@ -1,6 +1,6 @@
 variables:
-    CX_FLOW_BUG_TRACKER: $CX_BUG_TRACKER
-    CX_FLOW_BUG_TRACKER_IMPL: $CX_BUG_TRACKER
+    CX_BUG_TRACKER: "GitLab"
+    CX_BUG_TRACKER_IMPL: "GitLab"
     CX_EXCLUDE_FILES: ""
     CX_EXCLUDE_FOLDERS: ".git/"
     CHECKMARX_SEVERITY: "High"
@@ -22,51 +22,8 @@ variables:
     GITLAB_ERROR_MERGE: "false"
     PARAMS: ""
 
-checkmarx-scan:
-  stage: test
-  only:
-    - master
-  variables:
-  image:
-    name: checkmarx/cx-flow
-    entrypoint: ['']
-  script:
-    - cat ${CX_FLOW_CONFIG} > application.yml
-    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
-          --scan 
-          --app="${APP}" 
-          --namespace="${NAMESPACE}" 
-          --repo-name="${REPO_NAME}" 
-          --repo-url="${REPO_URL}" 
-          --preset="${CHECKMARX_PRESET}"
-          --cx-team="${CX_TEAM}" 
-          --cx-project="${CX_PROJECT}" 
-          --branch="${BRANCH}"
-          --bug-tracker="$BUG_TRACKER"
-          --severity="$CHECKMARX_SEVERITY"
-          --category="$CHECKMARX_CATEGORY"
-          --status="$CHECKMARX_STATUS"
-          --cwe="$CHECKMARX_CWE"
-          --exclude-files="$CX_EXCLUDE_FILES"
-          --exclude-folders="$CX_EXCLUDE_FOLDERS"
-          --spring.profiles.active="${CX_FLOW_ENABLED_VULNERABILITY_SCANNERS}" 
-          --f=. 
-          ${PARAMS}
-
-  artifacts:
-    when: on_success
-    reports:
-      sast: gl-sast-report.json
-    paths:
-      - gl-sast-report.json
-
-
-checkmarx-scan-mr:
-  stage: test
-  only:
-    - merge_requests
-  variables:
-      GITLAB_TOKEN: $GITLAB_TOKEN
+.checkmarx-scan:
+  state: test
   image:   
     name: checkmarx/cx-flow
     entrypoint: ['']
@@ -81,7 +38,7 @@ checkmarx-scan-mr:
           --cx-team="${CX_TEAM}" 
           --cx-project="${CX_PROJECT}" 
           --branch="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}"
-          --bug-tracker=GITLABMERGE
+          --bug-tracker=CX_FLOW_BUG_TRACKER
           --preset="${CHECKMARX_PRESET}"
           --severity="$CHECKMARX_SEVERITY"
           --cwe="$CHECKMARX_CWE"
@@ -94,3 +51,22 @@ checkmarx-scan-mr:
           --spring.profiles.active="${CX_FLOW_ENABLED_VULNERABILITY_SCANNERS}" 
           --f=. 
           ${PARAMS} 
+
+checkmarx-scan:
+  extends: .checkmarx-scan
+  stage: test
+  only:
+    - master
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" 
+      variables:
+        CX_BUG_TRACKER: GITLABMERGE
+    - if: $CX_BUG_TRACKER == "GitLabDashboard"
+      artifacts:
+        when: on_success
+        reports:
+          sast: gl-sast-report.json
+        paths:
+          - gl-sast-report.json
+
+  
