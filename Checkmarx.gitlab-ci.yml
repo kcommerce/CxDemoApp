@@ -1,4 +1,4 @@
-# these variables can be overwritten within your .gitlab-ci.ym file
+# these variables can be overwritten within your .gitlab-ci.yml file
 variables:
     CX_FLOW_BUG_TRACKER: "GitLab"             # Should be GitLab or GitLabDashboard.  It will be set to GitLabMerge automatially during a MR
     CX_FLOW_BUG_TRACKER_IMPL: "GitLab"
@@ -57,6 +57,8 @@ checkmarx-scan:
   extends: .checkmarx-scan
   before_script:
     - |
+      echo "Before script"
       if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
         export CX_BUG_TRACKER="GITLABMERGE"
+        echo "This is a merge request"
       fi
