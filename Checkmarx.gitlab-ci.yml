@@ -64,11 +64,7 @@ checkmarx-scan:
       ${CX_MERGE_ID}
       ${PARAMS}
   artifacts:
-    - if: $CX_FLOW_BUG_TRACKER=="GitLabDashboard"
-      reports:
-          sast: gl-sast-report.json
-          dependency_scanning: gl-dependency-scanning-report.json
-      paths:
-        - gl-sast-report.json
-        - gl-dependency-scanning-report.json
+    reports:
+      sast: gl-sast-report.json
+      dependency_scanning: gl-dependency-scanning-report.json
 
