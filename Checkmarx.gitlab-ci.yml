@@ -57,7 +57,7 @@ checkmarx-scan:
           --exclude-files="${CX_EXCLUDE_FILES}"
           --exclude-folders="${CX_EXCLUDE_FOLDERS}"
           --project-id="${CI_PROJECT_ID}" 
-          --merge-id="${CI_MERGE_REQUEST_IID}" 
           --spring.profiles.active="${CX_ENABLED_VULNERABILITY_SCANNERS}" 
           --f=. 
           ${PARAMS} 
+          #--merge-id="${CI_MERGE_REQUEST_IID}" 
