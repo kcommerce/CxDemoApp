@@ -1,19 +1,19 @@
-include: '.checkmarx.yml'
+#include: '.checkmarx.yml'
 #include: #'.checkmarx-template.yml'
-#include: 
-#  - remote: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/Checkmarx.gitlab-ci.yml'
+include: 
+  - remote: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/Checkmarx.gitlab-ci.yml'
 
 #checkmarx-scan:
 #  variables:
 #    CHECKMARX_PRESET: "OWASP TOP 10 - 2017"
     #CX_ENABLED_VULNERABILITY_SCANNERS: sast, sca
 
-stages:
-  - test
+#stages:
+#  - test
 
-checkmarx_scan:
-  stage: test
-  only:
-    - master
-    - merge_requests
-  extends: .checkmarx_scan
+#checkmarx_scan:
+#  stage: test
+#  only:
+#    - master
+#    - merge_requests
+#  extends: .checkmarx_scan
