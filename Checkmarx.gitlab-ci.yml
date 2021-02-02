@@ -35,9 +35,11 @@ checkmarx-scan:
     - |
       if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
         export CX_FLOW_BUG_TRACKER="GITLABMERGE"
+        export CX_MERGE_INFO = "--merge-id="${CI_MERGE_REQUEST_IID}"
       fi
   script:
-    - echo ${CX_FLOW_BUG_TRACKER}
+    - echo ${CI_COMMIT_REF_NAME}
+    - echo ${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}
     - cat ${CX_FLOW_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
           --scan 
