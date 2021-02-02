@@ -17,7 +17,7 @@ variables:
     REPO_URL: $CI_REPOSITORY_URL
     CX_ENABLED_VULNERABILITY_SCANNERS: "sast" # scanners (i.e. "sast, sca")
     CX_TEAM: "$CHECKMARX_TEAM"                # Checkmarx team name
-    BRANCH: "$CI_COMMIT_BRANCH"
+    BRANCH: "$CI_COMMIT_REF_NAME" # ?? "$CI_COMMIT_BRANCH"
     CX_FLOW_BREAK_BUILD: "false"
     GITLAB_BLOCK_MERGE: "false"
     GITLAB_ERROR_MERGE: "false"
@@ -42,26 +42,35 @@ checkmarx-scan:
     - echo ${CI_COMMIT_REF_NAME}
     - cat ${CX_FLOW_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
-          --scan 
-          --app="${APP}" 
-          --namespace="${NAMESPACE}" 
-          --repo-name="${REPO_NAME}" 
-          --repo-url="${REPO_URL}" 
-          --cx-team="${CX_TEAM}" 
-          --cx-project="${CX_PROJECT}" 
-          --branch="${CI_COMMIT_REF_NAME}"
-          --bug-tracker="${CX_FLOW_BUG_TRACKER}"
-          --preset="${CHECKMARX_PRESET}"
-          --severity="${CHECKMARX_SEVERITY}"
-          --cwe="${CHECKMARX_CWE}"
-          --category="${CHECKMARX_CATEGORY}"
-          --status="${CHECKMARX_STATUS}"
-          --exclude-files="${CX_EXCLUDE_FILES}"
-          --exclude-folders="${CX_EXCLUDE_FOLDERS}"
-          --project-id="${CI_PROJECT_ID}" 
-          --spring.profiles.active="${CX_ENABLED_VULNERABILITY_SCANNERS}" 
-          --f=. 
-          ${CX_MERGE_ID}
-          ${PARAMS}
-          #
-          #--branch="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}"
+      --scan 
+      --app="${APP}" 
+      --namespace="${NAMESPACE}" 
+      --repo-name="${REPO_NAME}" 
+      --repo-url="${REPO_URL}" 
+      --cx-team="${CX_TEAM}" 
+      --cx-project="${CX_PROJECT}" 
+      --branch="${CI_COMMIT_REF_NAME}"
+      --bug-tracker="${CX_FLOW_BUG_TRACKER}"
+      --preset="${CHECKMARX_PRESET}"
+      --severity="${CHECKMARX_SEVERITY}"
+      --cwe="${CHECKMARX_CWE}"
+      --category="${CHECKMARX_CATEGORY}"
+      --status="${CHECKMARX_STATUS}"
+      --exclude-files="${CX_EXCLUDE_FILES}"
+      --exclude-folders="${CX_EXCLUDE_FOLDERS}"
+      --project-id="${CI_PROJECT_ID}" 
+      --spring.profiles.active="${CX_ENABLED_VULNERABILITY_SCANNERS}" 
+      --f=. 
+      ${CX_MERGE_ID}
+      ${PARAMS}
+  rules:
+    - if: $CX_FLOW_BUG_TRACKER=="GitLabDashboard"
+      artifacts:
+       when: on_success
+      reports:
+          sast: gl-sast-report.json
+          dependency_scanning: gl-dependency-scanning-report.json
+      paths:
+        - gl-sast-report.json
+        - gl-dependency-scanning-report.json
+
