@@ -11,7 +11,7 @@ variables:
     CHECKMARX_INCREMENTAL: "false"            # Scan in incremental mode (True/False)
     CHECKMARX_PRESET: "High and Medium"       # Preset to use during scan
     CX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"  # Checkmarx Project name (i.e. FrontEnd-Dev)
-    APP: $CI_PROJECT_NAME
+    APP: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"
     NAMESPACE: $CI_PROJECT_NAMESPACE
     REPO_NAME: $CI_PROJECT_NAME
     REPO_URL: $CI_REPOSITORY_URL
@@ -47,7 +47,7 @@ checkmarx-scan:
           --repo-url="${REPO_URL}" 
           --cx-team="${CX_TEAM}" 
           --cx-project="${CX_PROJECT}" 
-          --branch="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}"
+          --branch="${CI_COMMIT_REF_NAME}"
           --bug-tracker="${CX_FLOW_BUG_TRACKER}"
           --preset="${CHECKMARX_PRESET}"
           --severity="${CHECKMARX_SEVERITY}"
@@ -61,3 +61,4 @@ checkmarx-scan:
           --f=. 
           ${PARAMS} 
           #--merge-id="${CI_MERGE_REQUEST_IID}" 
+          #--branch="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}"
