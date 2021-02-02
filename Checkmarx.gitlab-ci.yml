@@ -35,7 +35,7 @@ checkmarx-scan:
     - |
       if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
         export CX_FLOW_BUG_TRACKER="GITLABMERGE"
-        export CX_MERGE_ID="--merge-id="${CI_MERGE_REQUEST_IID}"
+        export CX_MERGE_ID="--merge-id=${CI_MERGE_REQUEST_IID}"
       fi
   script:
     - echo ${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}
