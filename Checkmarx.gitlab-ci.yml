@@ -29,7 +29,7 @@ checkmarx-scan:
     - merge_requests
     - master
   image:   
-    name: checkmarx/cx-flow:3aeebc4
+    name: checkmarx/cx-flow:a36d44e
     entrypoint: ['']
   before_script:
     - |
