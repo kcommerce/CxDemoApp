@@ -16,4 +16,4 @@ checkmarx_scan:
   only:
     - master
     - merge_requests
-  extends: .checkmarx_scan
+ # extends: .checkmarx_scan
