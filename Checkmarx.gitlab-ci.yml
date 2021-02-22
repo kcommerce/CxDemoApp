@@ -24,12 +24,12 @@ variables:
     PARAMS: ""                                # list of additional parameters (i.e. )
 
 .checkmarx-scan:
-  stage: test
+#  stage: test
 #  only:
 #    - merge_requests
 #    - master
   image:   
-    name: checkmarx/cx-flow:a36d44e
+    name: checkmarx/cx-flow
     entrypoint: ['']
 #  before_script:
 #    - |
