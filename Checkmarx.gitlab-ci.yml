@@ -28,46 +28,46 @@ variables:
   only:
     - merge_requests
     - master
-  image:   
-    name: checkmarx/cx-flow
-    entrypoint: ['']
-  before_script:
-    - |
-      if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
-        export CX_FLOW_BUG_TRACKER="GITLABMERGE"
-        export CX_MERGE_ID="--merge-id=${CI_MERGE_REQUEST_IID}"
-      fi
+#  image:   
+#    name: checkmarx/cx-flow
+#    entrypoint: ['']
+#  before_script:
+#    - |
+#      if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
+#        export CX_FLOW_BUG_TRACKER="GITLABMERGE"
+#        export CX_MERGE_ID="--merge-id=${CI_MERGE_REQUEST_IID}"
+#      fi
   script:
     - echo ${APP}
-    - echo ${NAMESPACE}
-    - echo ${REPO_NAME}
-    - echo ${REPO_URL}
-    - echo ${CX_PROJECT}
-    - echo ${CI_COMMIT_REF_NAME}
-    - cat ${CX_FLOW_CONFIG} > application.yml
-    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
-      --scan 
-      --app="${APP}" 
-      --namespace="${NAMESPACE}" 
-      --repo-name="${REPO_NAME}" 
-      --repo-url="${REPO_URL}" 
-      --cx-team="${CX_TEAM}" 
-      --cx-project="${CX_PROJECT}" 
-      --branch="${CI_COMMIT_REF_NAME}"
-      --bug-tracker="${CX_FLOW_BUG_TRACKER}"
-      --preset="${CHECKMARX_PRESET}"
-      --severity="${CHECKMARX_SEVERITY}"
-      --cwe="${CHECKMARX_CWE}"
-      --category="${CHECKMARX_CATEGORY}"
-      --status="${CHECKMARX_STATUS}"
-      --exclude-files="${CX_EXCLUDE_FILES}"
-      --exclude-folders="${CX_EXCLUDE_FOLDERS}"
-      --project-id="${CI_PROJECT_ID}" 
-      --spring.profiles.active="${CX_ENABLED_VULNERABILITY_SCANNERS}" 
-      --f=. 
-      ${CX_MERGE_ID}
-      ${PARAMS}
-  artifacts:
-    reports:
-      sast: gl-sast-report.json
-      dependency_scanning: gl-dependency-scanning-report.json
+#    - echo ${NAMESPACE}
+#    - echo ${REPO_NAME}
+#  - echo ${REPO_URL}
+#    - echo ${CX_PROJECT}
+#    - echo ${CI_COMMIT_REF_NAME}
+#    - cat ${CX_FLOW_CONFIG} > application.yml
+#    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
+#      --scan 
+#      --app="${APP}" 
+#      --namespace="${NAMESPACE}" 
+#      --repo-name="${REPO_NAME}" 
+#      --repo-url="${REPO_URL}" 
+#      --cx-team="${CX_TEAM}" 
+#      --cx-project="${CX_PROJECT}" 
+#      --branch="${CI_COMMIT_REF_NAME}"
+#      --bug-tracker="${CX_FLOW_BUG_TRACKER}"
+#      --preset="${CHECKMARX_PRESET}"
+#      --severity="${CHECKMARX_SEVERITY}"
+#      --cwe="${CHECKMARX_CWE}"
+#      --category="${CHECKMARX_CATEGORY}"
+#      --status="${CHECKMARX_STATUS}"
+#      --exclude-files="${CX_EXCLUDE_FILES}"
+#      --exclude-folders="${CX_EXCLUDE_FOLDERS}"
+#      --project-id="${CI_PROJECT_ID}" 
+#      --spring.profiles.active="${CX_ENABLED_VULNERABILITY_SCANNERS}" 
+#      --f=. 
+#      ${CX_MERGE_ID}
+#      ${PARAMS}
+#  artifacts:
+#    reports:
+#      sast: gl-sast-report.json
+#      dependency_scanning: gl-dependency-scanning-report.json
