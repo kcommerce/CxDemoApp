@@ -28,9 +28,9 @@ variables:
 #  only:
 #    - merge_requests
 #    - master
-  image:   
-    name: checkmarx/cx-flow
-    entrypoint: ['']
+#  image:   
+#    name: checkmarx/cx-flow
+#    entrypoint: ['']
 #  before_script:
 #    - |
 #      if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
