@@ -11,9 +11,9 @@ include:
 #stages:
 #  - test
 
-#checkmarx_scan:
-#  stage: test
-#  only:
-#    - master
-#    - merge_requests
-#  extends: .checkmarx_scan
+checkmarx_scan:
+  stage: test
+  only:
+    - master
+    - merge_requests
+  extends: .checkmarx_scan
