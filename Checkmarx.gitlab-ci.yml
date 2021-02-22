@@ -38,7 +38,11 @@
         export CX_MERGE_ID="--merge-id=${CI_MERGE_REQUEST_IID}"
       fi
   script:
-    - echo ${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}
+    - echo ${APP}
+    - echo ${NAMESPACE}
+    - echo ${REPO_NAME}
+    - echo ${REPO_URL}
+    - echo ${CX_PROJECT}
     - echo ${CI_COMMIT_REF_NAME}
     - cat ${CX_FLOW_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
