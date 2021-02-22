@@ -11,11 +11,9 @@ include:
 #stages:
 #  - test
 
-checkmarx_scan:
+an_action:
   stage: test
   only:
     - master
-    - merge_requests
   script:
     - echo "This is a scan"
- # extends: .checkmarx_scan
