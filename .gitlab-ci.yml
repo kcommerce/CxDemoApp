@@ -1,7 +1,7 @@
 #include: '.checkmarx.yml'
 #include: #'.checkmarx-template.yml'
 include: 
-  - remote: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/Checkmarx.gitlab-ci.yml'
+  - 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/Checkmarx.gitlab-ci.yml'
 
 #checkmarx-scan:
 #  variables:
