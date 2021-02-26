@@ -11,9 +11,9 @@ include:
 #stages:
 #  - test
 
-checkmarx_scan:
+#checkmarx_scan:
 #  script:
 #    - echo "This is a scan"
-  extends:
-    .checkmarx-scan
+#  extends:
+#    .checkmarx-scan
 
