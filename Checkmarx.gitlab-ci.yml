@@ -23,7 +23,7 @@
 #    GITLAB_ERROR_MERGE: "false"
 #    PARAMS: ""                                # list of additional parameters (i.e. )
 
-.checkmarx-scan:
+checkmarx-scan:
   stage: test
   only:
     - merge_requests
