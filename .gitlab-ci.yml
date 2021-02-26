@@ -1,7 +1,6 @@
 #include: '.checkmarx.yml'
 #include: #'.checkmarx-template.yml'
-include: 
-  - remote: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/Checkmarx.gitlab-ci.yml'
+include: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/Checkmarx.gitlab-ci.yml'
 
 #checkmarx-scan:
 #  variables:
@@ -13,6 +12,9 @@ include:
 #    - echo "This is a scan"
 #  extends:
 #    .checkmarx-scan
+
+stages:
+  - test
 
 scan:
   script:
