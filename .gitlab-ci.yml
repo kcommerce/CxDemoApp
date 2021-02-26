@@ -12,8 +12,8 @@ include:
 #  - test
 
 checkmarx_scan:
-  script:
-    - echo "This is a scan"
+#  script:
+#    - echo "This is a scan"
   extends:
     .checkmarx-scan
 
