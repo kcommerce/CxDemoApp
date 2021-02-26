@@ -1,15 +1,12 @@
 #include: '.checkmarx.yml'
 #include: #'.checkmarx-template.yml'
 include: 
-  - 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/Checkmarx.gitlab-ci.yml'
+  - template: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/Checkmarx.gitlab-ci.yml'
 
 #checkmarx-scan:
 #  variables:
 #    CHECKMARX_PRESET: "OWASP TOP 10 - 2017"
     #CX_ENABLED_VULNERABILITY_SCANNERS: sast, sca
-
-stages:
-  - test
 
 #checkmarx_scan:
 #  script:
