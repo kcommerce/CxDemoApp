@@ -13,8 +13,8 @@ include: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/Checkmarx.gitlab
 #  extends:
 #    .checkmarx-scan
 
-stages:
-  - test
+#stages:
+#  - test
 
 scan:
   script:
