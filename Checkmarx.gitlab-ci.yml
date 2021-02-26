@@ -1,27 +1,27 @@
 # these variables can be overwritten within your .gitlab-ci.yml file
-variables:
-    CX_FLOW_BUG_TRACKER: "GitLab"             # Should be GitLab or GitLabDashboard.  It will be set to GitLabMerge automatially during a MR
-    CX_FLOW_BUG_TRACKER_IMPL: "GitLab"
-    CX_EXCLUDE_FILES: ""                      # exclude specific file types from the Checkmarx scan
-    CX_EXCLUDE_FOLDERS: ".git/"               # exclude specific directories from the Checkmarx scan
-    CHECKMARX_SEVERITY: "High"                # create issues filtering on Severity (i.e. "High")
-    CHECKMARX_CATEGORY: ""                    # create issues filtering on Category (i.e. ) 
-    CHECKMARX_CWE: ""                         # create issues filtering on Cwe (i.e. 89, 94)
-    CHECKMARX_STATUS: ""                      # create issues filtering on Status (i.e. "Confirmed")
-    CHECKMARX_INCREMENTAL: "false"            # Scan in incremental mode (True/False)
-    CHECKMARX_PRESET: "High and Medium"       # Preset to use during scan
-    CX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"  # Checkmarx Project name (i.e. FrontEnd-Dev)
-    APP: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"
-    NAMESPACE: $CI_PROJECT_NAMESPACE
-    REPO_NAME: $CI_PROJECT_NAME
-    REPO_URL: $CI_REPOSITORY_URL
-    CX_ENABLED_VULNERABILITY_SCANNERS: "sast" # scanners (i.e. "sast, sca")
-    CX_TEAM: "$CHECKMARX_TEAM"                # Checkmarx team name
-    BRANCH: "$CI_COMMIT_REF_NAME" # ?? "$CI_COMMIT_BRANCH"
-    CX_FLOW_BREAK_BUILD: "false"
-    GITLAB_BLOCK_MERGE: "false"
-    GITLAB_ERROR_MERGE: "false"
-    PARAMS: ""                                # list of additional parameters (i.e. )
+#variables:
+#    CX_FLOW_BUG_TRACKER: "GitLab"             # Should be GitLab or GitLabDashboard.  It will be set to GitLabMerge automatially during a MR
+#    CX_FLOW_BUG_TRACKER_IMPL: "GitLab"
+#    CX_EXCLUDE_FILES: ""                      # exclude specific file types from the Checkmarx scan
+#    CX_EXCLUDE_FOLDERS: ".git/"               # exclude specific directories from the Checkmarx scan
+#    CHECKMARX_SEVERITY: "High"                # create issues filtering on Severity (i.e. "High")
+#    CHECKMARX_CATEGORY: ""                    # create issues filtering on Category (i.e. ) 
+#    CHECKMARX_CWE: ""                         # create issues filtering on Cwe (i.e. 89, 94)
+#    CHECKMARX_STATUS: ""                      # create issues filtering on Status (i.e. "Confirmed")
+#    CHECKMARX_INCREMENTAL: "false"            # Scan in incremental mode (True/False)
+#    CHECKMARX_PRESET: "High and Medium"       # Preset to use during scan
+#    CX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"  # Checkmarx Project name (i.e. FrontEnd-Dev)
+#    APP: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"
+#    NAMESPACE: $CI_PROJECT_NAMESPACE
+#    REPO_NAME: $CI_PROJECT_NAME
+#    REPO_URL: $CI_REPOSITORY_URL
+#    CX_ENABLED_VULNERABILITY_SCANNERS: "sast" # scanners (i.e. "sast, sca")
+#    CX_TEAM: "$CHECKMARX_TEAM"                # Checkmarx team name
+#    BRANCH: "$CI_COMMIT_REF_NAME" # ?? "$CI_COMMIT_BRANCH"
+#    CX_FLOW_BREAK_BUILD: "false"
+#    GITLAB_BLOCK_MERGE: "false"
+#    GITLAB_ERROR_MERGE: "false"
+#    PARAMS: ""                                # list of additional parameters (i.e. )
 
 .checkmarx-scan:
   stage: test
@@ -38,7 +38,7 @@ variables:
 #        export CX_MERGE_ID="--merge-id=${CI_MERGE_REQUEST_IID}"
 #      fi
   script:
-    - echo ${APP}
+    - echo "Hello World"
 #    - echo ${NAMESPACE}
 #    - echo ${REPO_NAME}
 #  - echo ${REPO_URL}
