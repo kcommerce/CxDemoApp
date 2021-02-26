@@ -15,5 +15,5 @@ checkmarx_scan:
   script:
     - echo "This is a scan"
   extends:
-    .checkmarx_scan
+    .checkmarx-scan
 
