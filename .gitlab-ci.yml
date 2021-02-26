@@ -17,3 +17,6 @@ include:
 #  extends:
 #    .checkmarx-scan
 
+scan:
+  script:
+    - echo "SCAN"
