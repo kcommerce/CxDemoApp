@@ -2,8 +2,8 @@
 variables:
     CX_FLOW_BUG_TRACKER: "GitLab"             # Should be GitLab or GitLabDashboard.  It will be set to GitLabMerge automatially during a MR
     CX_FLOW_BUG_TRACKER_IMPL: "GitLab"
-    CHECKMARX_EXCLUDE_FILES: ""                      # exclude specific file types from the Checkmarx scan
-    CHECKMARX_EXCLUDE_FOLDERS: ".git/"               # exclude specific directories from the Checkmarx scan
+    CHECKMARX_EXCLUDE_FILES: ""               # exclude specific file types from the Checkmarx scan
+    CHECKMARX_EXCLUDE_FOLDERS: ".git/"        # exclude specific directories from the Checkmarx scan
     CHECKMARX_SEVERITY: "High"                # create issues filtering on Severity (i.e. "High")
     CHECKMARX_CATEGORY: ""                    # create issues filtering on Category (i.e. ) 
     CHECKMARX_CWE: ""                         # create issues filtering on Cwe (i.e. 89, 94)
@@ -21,13 +21,11 @@ variables:
     CX_FLOW_BREAK_BUILD: "false"
     GITLAB_BLOCK_MERGE: "false"
     GITLAB_ERROR_MERGE: "false"
-    CHECKMARX_PARAMS: ""                                # list of additional parameters (i.e. )
+    CHECKMARX_PARAMS: ""                      # list of additional parameters (i.e. )
 
 checkmarx-scan-merge-request:
   stage: test
   only:
-    variables:
-      - $CX_FLOW_BUG_TRACKER == "GitLabDashboard"
     refs:
       - merge_requests
   image:   
@@ -72,7 +70,7 @@ checkmarx-scan-push:
   stage: test
   only:
     variables:
-      - $CX_FLOW_BUG_TRACKER =~ "GitLabDashboard"
+      - $CX_FLOW_BUG_TRACKER != "GitLabDashboard"
     refs:
       - master
   image:   
