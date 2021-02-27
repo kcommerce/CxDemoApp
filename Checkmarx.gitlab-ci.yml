@@ -23,20 +23,20 @@ variables:
     GITLAB_ERROR_MERGE: "false"
     CHECKMARX_PARAMS: ""                                # list of additional parameters (i.e. )
 
-checkmarx-scan:
+checkmarx-scan-merge-request:
   stage: test
   only:
-    - merge_requests
-    - master
+    variables:
+      - $CX_FLOW_BUG_TRACKER == "GitLabDashboard"
+    refs:
+      - merge_requests
   image:   
     name: checkmarx/cx-flow:8e27de2
     entrypoint: ['']
   before_script:
     - |
-      if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
-        export CX_FLOW_BUG_TRACKER="GITLABMERGE"
-        export CHECKMARX_MERGE_ID="--merge-id=${CI_MERGE_REQUEST_IID}"
-      fi
+      export CX_FLOW_BUG_TRACKER="GITLABMERGE"
+      export CHECKMARX_MERGE_ID="--merge-id=${CI_MERGE_REQUEST_IID}"
   script:
     - echo "Hello World"
     - echo ${CHECKMARX_NAMESPACE}
@@ -67,29 +67,17 @@ checkmarx-scan:
       --f=. 
       ${CHECKMARX_MERGE_ID}
       ${CHECKMARX_PARAMS}
-  #artifacts:
-  #  reports:
-  #    sast: gl-sast-report.json
-  #    dependency_scanning: gl-dependency-scanning-report.json
 
-checkmarx-scan-dashboard:
-
+checkmarx-scan-push:
   stage: test
   only:
     variables:
-      - $CX_FLOW_BUG_TRACKER == "GitLabDashboard"
+      - $CX_FLOW_BUG_TRACKER =~ "GitLabDashboard"
     refs:
-      - merge_requests
       - master
   image:   
     name: checkmarx/cx-flow:8e27de2
     entrypoint: ['']
-  before_script:
-    - |
-      if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
-        export CX_FLOW_BUG_TRACKER="GITLABMERGE"
-        export CHECKMARX_MERGE_ID="--merge-id=${CI_MERGE_REQUEST_IID}"
-      fi
   script:
     - echo "Hello World"
     - echo ${CHECKMARX_NAMESPACE}
@@ -118,7 +106,47 @@ checkmarx-scan-dashboard:
       --project-id="${CI_PROJECT_ID}" 
       --spring.profiles.active="${CHECKMARX_ENABLED_VULNERABILITY_SCANNERS}" 
       --f=. 
-      ${CHECKMARX_MERGE_ID}
+      ${CHECKMARX_PARAMS}
+
+checkmarx-scan-dashboard:
+
+  stage: test
+  only:
+    variables:
+      - $CX_FLOW_BUG_TRACKER == "GitLabDashboard"
+    refs:
+      - master
+  image:   
+    name: checkmarx/cx-flow:8e27de2
+    entrypoint: ['']
+  script:
+    - echo "Hello World"
+    - echo ${CHECKMARX_NAMESPACE}
+    - echo ${CHECKMARX_REPO_NAME}
+    - echo ${CHECKMARX_REPO_URL}
+    - echo ${CHECKMARX_PROJECT}
+    - echo ${CI_COMMIT_REF_NAME}
+    - cat ${CX_FLOW_CONFIG} > application.yml
+    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
+      --scan 
+      --app="${CHECKMARX_APP}" 
+      --namespace="${CHECKMARX_NAMESPACE}" 
+      --repo-name="${CHECKMARX_REPO_NAME}" 
+      --repo-url="${CHECKMARX_REPO_URL}" 
+      --cx-team="${CHECKMARX_TEAM}" 
+      --cx-project="${CHECKMARX_PROJECT}" 
+      --branch="${CI_COMMIT_REF_NAME}"
+      --bug-tracker="${CX_FLOW_BUG_TRACKER}"
+      --preset="${CHECKMARX_PRESET}"
+      --severity="${CHECKMARX_SEVERITY}"
+      --cwe="${CHECKMARX_CWE}"
+      --category="${CHECKMARX_CATEGORY}"
+      --status="${CHECKMARX_STATUS}"
+      --exclude-files="${CHECKMARX_EXCLUDE_FILES}"
+      --exclude-folders="${CHECKMARX_EXCLUDE_FOLDERS}"
+      --project-id="${CI_PROJECT_ID}" 
+      --spring.profiles.active="${CHECKMARX_ENABLED_VULNERABILITY_SCANNERS}" 
+      --f=. 
       ${CHECKMARX_PARAMS}
   artifacts:
     reports:
