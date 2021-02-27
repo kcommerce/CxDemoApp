@@ -1,7 +1,7 @@
 # these variables can be overwritten within your .gitlab-ci.yml file
 variables:
     CX_FLOW_BUG_TRACKER: "GitLab"             # Should be GitLab or GitLabDashboard.  It will be set to GitLabMerge automatially during a MR
-    CX_FLOW_BUG_TRACKER_IMPL: "GitLab"
+    CX_FLOW_BUG_TRACKER_IMPL: "$CX_FLOW_BUG_TRACKER"
     CHECKMARX_EXCLUDE_FILES: ""               # exclude specific file types from the Checkmarx scan
     CHECKMARX_EXCLUDE_FOLDERS: ".git/"        # exclude specific directories from the Checkmarx scan
     CHECKMARX_SEVERITY: "High"                # create issues filtering on Severity (i.e. "High")
