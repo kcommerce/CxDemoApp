@@ -2,26 +2,26 @@
 variables:
     CX_FLOW_BUG_TRACKER: "GitLab"             # Should be GitLab or GitLabDashboard.  It will be set to GitLabMerge automatially during a MR
     CX_FLOW_BUG_TRACKER_IMPL: "GitLab"
-    CX_EXCLUDE_FILES: ""                      # exclude specific file types from the Checkmarx scan
-    CX_EXCLUDE_FOLDERS: ".git/"               # exclude specific directories from the Checkmarx scan
+    CHECKMARX_EXCLUDE_FILES: ""                      # exclude specific file types from the Checkmarx scan
+    CHECKMARX_EXCLUDE_FOLDERS: ".git/"               # exclude specific directories from the Checkmarx scan
     CHECKMARX_SEVERITY: "High"                # create issues filtering on Severity (i.e. "High")
     CHECKMARX_CATEGORY: ""                    # create issues filtering on Category (i.e. ) 
     CHECKMARX_CWE: ""                         # create issues filtering on Cwe (i.e. 89, 94)
     CHECKMARX_STATUS: ""                      # create issues filtering on Status (i.e. "Confirmed")
     CHECKMARX_INCREMENTAL: "false"            # Scan in incremental mode (True/False)
     CHECKMARX_PRESET: "High and Medium"       # Preset to use during scan
-    CX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"  # Checkmarx Project name (i.e. FrontEnd-Dev)
-    APP: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"
-    NAMESPACE: $CI_PROJECT_NAMESPACE
-    REPO_NAME: $CI_PROJECT_NAME
-    REPO_URL: $CI_REPOSITORY_URL
-    CX_ENABLED_VULNERABILITY_SCANNERS: "sast" # scanners (i.e. "sast, sca")
-    CX_TEAM: "$CHECKMARX_TEAM"                # Checkmarx team name
-    BRANCH: "$CI_COMMIT_REF_NAME" # ?? "$CI_COMMIT_BRANCH"
+    CHECKMARX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"  # Checkmarx Project name (i.e. FrontEnd-Dev)
+    CHECKMARX_APP: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"
+    CHECKMARX_NAMESPACE: $CI_PROJECT_NAMESPACE
+    CHECKMARX_REPO_NAME: $CI_PROJECT_NAME
+    CHECKMARX_REPO_URL: $CI_REPOSITORY_URL
+    CHECKMARX_ENABLED_VULNERABILITY_SCANNERS: "sast" # scanners (i.e. "sast, sca")
+    CHECKMARX_TEAM: "$CHECKMARX_TEAM"                # Checkmarx team name
+    CHECKMARX_BRANCH: "$CI_COMMIT_REF_NAME" # ?? "$CI_COMMIT_BRANCH"
     CX_FLOW_BREAK_BUILD: "false"
     GITLAB_BLOCK_MERGE: "false"
     GITLAB_ERROR_MERGE: "false"
-    PARAMS: ""                                # list of additional parameters (i.e. )
+    CHECKMARX_PARAMS: ""                                # list of additional parameters (i.e. )
 
 checkmarx-scan:
   stage: test
@@ -35,24 +35,24 @@ checkmarx-scan:
     - |
       if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
         export CX_FLOW_BUG_TRACKER="GITLABMERGE"
-        export CX_MERGE_ID="--merge-id=${CI_MERGE_REQUEST_IID}"
+        export CHECKMARX_MERGE_ID="--merge-id=${CI_MERGE_REQUEST_IID}"
       fi
   script:
     - echo "Hello World"
-    - echo ${NAMESPACE}
-    - echo ${REPO_NAME}
-    - echo ${REPO_URL}
-    - echo ${CX_PROJECT}
+    - echo ${CHECKMARX_NAMESPACE}
+    - echo ${CHECKMARX_REPO_NAME}
+    - echo ${CHECKMARX_REPO_URL}
+    - echo ${CHECKMARX_PROJECT}
     - echo ${CI_COMMIT_REF_NAME}
     - cat ${CX_FLOW_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
       --scan 
-      --app="${APP}" 
-      --namespace="${NAMESPACE}" 
-      --repo-name="${REPO_NAME}" 
-      --repo-url="${REPO_URL}" 
-      --cx-team="${CX_TEAM}" 
-      --cx-project="${CX_PROJECT}" 
+      --app="${CHECKMARX_APP}" 
+      --namespace="${CHECKMARX_NAMESPACE}" 
+      --repo-name="${CHECKMARX_REPO_NAME}" 
+      --repo-url="${CHECKMARX_REPO_URL}" 
+      --cx-team="${CHECKMARX_TEAM}" 
+      --cx-project="${CHECKMARX_PROJECT}" 
       --branch="${CI_COMMIT_REF_NAME}"
       --bug-tracker="${CX_FLOW_BUG_TRACKER}"
       --preset="${CHECKMARX_PRESET}"
@@ -60,13 +60,64 @@ checkmarx-scan:
       --cwe="${CHECKMARX_CWE}"
       --category="${CHECKMARX_CATEGORY}"
       --status="${CHECKMARX_STATUS}"
-      --exclude-files="${CX_EXCLUDE_FILES}"
-      --exclude-folders="${CX_EXCLUDE_FOLDERS}"
+      --exclude-files="${CHECKMARX_EXCLUDE_FILES}"
+      --exclude-folders="${CHECKMARX_EXCLUDE_FOLDERS}"
       --project-id="${CI_PROJECT_ID}" 
-      --spring.profiles.active="${CX_ENABLED_VULNERABILITY_SCANNERS}" 
+      --spring.profiles.active="${CHECKMARX_ENABLED_VULNERABILITY_SCANNERS}" 
       --f=. 
-      ${CX_MERGE_ID}
-      ${PARAMS}
+      ${CHECKMARX_MERGE_ID}
+      ${CHECKMARX_PARAMS}
+  #artifacts:
+  #  reports:
+  #    sast: gl-sast-report.json
+  #    dependency_scanning: gl-dependency-scanning-report.json
+
+checkmarx-scan-dashboard:
+  rules:
+    - if: '$CX_FLOW_BUG_TRACKER == "GitLabDashboard"'
+  stage: test
+  only:
+    - merge_requests
+    - master
+  image:   
+    name: checkmarx/cx-flow:8e27de2
+    entrypoint: ['']
+  before_script:
+    - |
+      if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
+        export CX_FLOW_BUG_TRACKER="GITLABMERGE"
+        export CHECKMARX_MERGE_ID="--merge-id=${CI_MERGE_REQUEST_IID}"
+      fi
+  script:
+    - echo "Hello World"
+    - echo ${CHECKMARX_NAMESPACE}
+    - echo ${CHECKMARX_REPO_NAME}
+    - echo ${CHECKMARX_REPO_URL}
+    - echo ${CHECKMARX_PROJECT}
+    - echo ${CI_COMMIT_REF_NAME}
+    - cat ${CX_FLOW_CONFIG} > application.yml
+    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
+      --scan 
+      --app="${CHECKMARX_APP}" 
+      --namespace="${CHECKMARX_NAMESPACE}" 
+      --repo-name="${CHECKMARX_REPO_NAME}" 
+      --repo-url="${CHECKMARX_REPO_URL}" 
+      --cx-team="${CHECKMARX_TEAM}" 
+      --cx-project="${CHECKMARX_PROJECT}" 
+      --branch="${CI_COMMIT_REF_NAME}"
+      --bug-tracker="${CX_FLOW_BUG_TRACKER}"
+      --preset="${CHECKMARX_PRESET}"
+      --severity="${CHECKMARX_SEVERITY}"
+      --cwe="${CHECKMARX_CWE}"
+      --category="${CHECKMARX_CATEGORY}"
+      --status="${CHECKMARX_STATUS}"
+      --exclude-files="${CHECKMARX_EXCLUDE_FILES}"
+      --exclude-folders="${CHECKMARX_EXCLUDE_FOLDERS}"
+      --project-id="${CI_PROJECT_ID}" 
+      --spring.profiles.active="${CHECKMARX_ENABLED_VULNERABILITY_SCANNERS}" 
+      --f=. 
+      ${CHECKMARX_MERGE_ID}
+      ${CHECKMARX_PARAMS}
   artifacts:
     reports:
       sast: gl-sast-report.json
