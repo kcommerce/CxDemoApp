@@ -4,10 +4,10 @@
 
 # these variables can be overwritten within your .gitlab-ci.yml file
 variables:
-    CX_FLOW_DOCKER_IMAGE: "cxflow"
-    CX_FLOW_BUG_TRACKER: "GitLab"             # If GitLab, will create GitLab Issues.
+    CHECKMARX_DOCKER_IMAGE: "cxflow"
+    CHECKMARX_BUG_TRACKER: "GitLab"             # If GitLab, will create GitLab Issues.
                                               # It will be set to GitLabMerge automatially during a MR
-    CX_FLOW_BUG_TRACKER_IMPL: "$CX_FLOW_BUG_TRACKER"
+    CHECKMARX_BUG_TRACKER_IMPL: "$CHECKMARX_BUG_TRACKER"
     CHECKMARX_EXCLUDE_FILES: ""               # exclude specific file types from the Checkmarx scan
     CHECKMARX_EXCLUDE_FOLDERS: ".git/"        # exclude specific directories from the Checkmarx scan
     CHECKMARX_SEVERITY: "High"                # create issues filtering on Severity (i.e. "High")
@@ -24,7 +24,7 @@ variables:
     CHECKMARX_ENABLED_VULNERABILITY_SCANNERS: "sast" # scanners (i.e. "sast, sca")
     CHECKMARX_TEAM: "$CHECKMARX_TEAM"         # Checkmarx team name
     CHECKMARX_BRANCH: "$CI_COMMIT_REF_NAME"   # ?? "$CI_COMMIT_BRANCH"
-    CX_FLOW_BREAK_BUILD: "false"
+    CHECKMARX_BREAK_BUILD: "false"
     GITLAB_BLOCK_MERGE: "false"
     GITLAB_ERROR_MERGE: "false"
     CHECKMARX_PARAMS: ""                      # list of additional parameters (i.e. )
@@ -35,10 +35,10 @@ checkmarx-scan-merge-request:
     refs:
       - merge_requests
   image:   
-    name: checkmarx/"${CX_FLOW_DOCKER_IMAGE}"
+    name: checkmarx/"${CHECKMARX_DOCKER_IMAGE}"
     entrypoint: ['']
   script:
-    - cat ${CX_FLOW_CONFIG} > application.yml
+    - cat ${CHECKMARX_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
       --scan 
       --app="${CHECKMARX_APP}" 
@@ -66,24 +66,24 @@ checkmarx-scan-push:
   stage: test
   only:
     variables:
-      - $CX_FLOW_BUG_TRACKER != "GitLabDashboard"
+      - $CHECKMARX_BUG_TRACKER != "GitLabDashboard"
     refs:
       - master
   image:   
-    name: checkmarx/${CX_FLOW_DOCKER_IMAGE}
+    name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
   script:
-    - cat ${CX_FLOW_CONFIG} > application.yml
+    - cat ${CHECKMARX_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
       --scan 
       --app="${CHECKMARX_APP}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
       --repo-name="${CHECKMARX_REPO_NAME}" 
       --repo-url="${CHECKMARX_REPO_URL}" 
-      --cx-team="${CHECKMARX_TEAM}" 
+      --cx-team="${CHECKMARX_TEAM}"
       --cx-project="${CHECKMARX_PROJECT}" 
       --branch="${CI_COMMIT_REF_NAME}"
-      --bug-tracker="${CX_FLOW_BUG_TRACKER}"
+      --bug-tracker="${CHECKMARX_BUG_TRACKER}"
       --preset="${CHECKMARX_PRESET}"
       --severity="${CHECKMARX_SEVERITY}"
       --cwe="${CHECKMARX_CWE}"
@@ -100,14 +100,14 @@ checkmarx-scan-dashboard:
   stage: test
   only:
     variables:
-      - $CX_FLOW_BUG_TRACKER == "GitLabDashboard"
+      - $CHECKMARX_BUG_TRACKER == "GitLabDashboard"
     refs:
       - master
   image:   
-    name: checkmarx/${CX_FLOW_DOCKER_IMAGE}
+    name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
   script:
-    - cat ${CX_FLOW_CONFIG} > application.yml
+    - cat ${CHECKMARX_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
       --scan 
       --app="${CHECKMARX_APP}" 
@@ -117,7 +117,7 @@ checkmarx-scan-dashboard:
       --cx-team="${CHECKMARX_TEAM}" 
       --cx-project="${CHECKMARX_PROJECT}" 
       --branch="${CI_COMMIT_REF_NAME}"
-      --bug-tracker="${CX_FLOW_BUG_TRACKER}"
+      --bug-tracker="${CHECKMARX_BUG_TRACKER}"
       --preset="${CHECKMARX_PRESET}"
       --severity="${CHECKMARX_SEVERITY}"
       --cwe="${CHECKMARX_CWE}"
