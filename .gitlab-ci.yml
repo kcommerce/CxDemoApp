@@ -2,6 +2,6 @@ include: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/Checkmarx.gitlab
 
 variables:
     CX_FLOW_BUG_TRACKER: "GitLabDashboard"
-    CX_FLOW_DOCKER_IMAGE: cx-flow:8e27de2
+    CX_FLOW_DOCKER_IMAGE: "cx-flow:8e27de2"
     CHECKMARX_ENABLED_VULNERABILITY_SCANNERS: "sast,sca"
 
