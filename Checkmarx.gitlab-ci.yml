@@ -39,7 +39,7 @@ checkmarx-scan-merge-request:
     entrypoint: ['']
   script:
     - cat ${CX_FLOW_CONFIG} > application.yml
-    - java -jar /app/cx-flow.jar
+    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
       --scan 
       --app="${CHECKMARX_APP}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
@@ -74,7 +74,7 @@ checkmarx-scan-push:
     entrypoint: ['']
   script:
     - cat ${CX_FLOW_CONFIG} > application.yml
-    - java -jar /app/cx-flow.jar
+    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
       --scan 
       --app="${CHECKMARX_APP}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
@@ -108,7 +108,7 @@ checkmarx-scan-dashboard:
     entrypoint: ['']
   script:
     - cat ${CX_FLOW_CONFIG} > application.yml
-    - java -jar /app/cx-flow.jar
+    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
       --scan 
       --app="${CHECKMARX_APP}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
