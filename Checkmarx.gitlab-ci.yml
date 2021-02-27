@@ -73,12 +73,14 @@ checkmarx-scan:
   #    dependency_scanning: gl-dependency-scanning-report.json
 
 checkmarx-scan-dashboard:
-  rules:
-    - if: '$CX_FLOW_BUG_TRACKER == "GitLabDashboard"'
+
   stage: test
   only:
-    - merge_requests
-    - master
+    variables:
+      - $CX_FLOW_BUG_TRACKER == "GitLabDashboard"
+    refs:
+      - merge_requests
+      - master
   image:   
     name: checkmarx/cx-flow:8e27de2
     entrypoint: ['']
