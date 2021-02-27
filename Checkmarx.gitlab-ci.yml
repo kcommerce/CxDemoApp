@@ -70,7 +70,7 @@ checkmarx-scan-push:
     refs:
       - master
   image:   
-    name: checkmarx/"${CX_FLOW_DOCKER_IMAGE}"
+    name: checkmarx/${CX_FLOW_DOCKER_IMAGE}
     entrypoint: ['']
   script:
     - cat ${CX_FLOW_CONFIG} > application.yml
@@ -104,7 +104,7 @@ checkmarx-scan-dashboard:
     refs:
       - master
   image:   
-    name: checkmarx/"${CX_FLOW_DOCKER_IMAGE}"
+    name: checkmarx/${CX_FLOW_DOCKER_IMAGE}
     entrypoint: ['']
   script:
     - cat ${CX_FLOW_CONFIG} > application.yml
