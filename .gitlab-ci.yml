@@ -1,5 +1,5 @@
 include: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/Checkmarx.gitlab-ci.yml'
 
 variables:
-    CX_PROJECT: "JAMES"
+    CX_FLOW_BUG_TRACKER: "GitLabDashboard"
 
