@@ -5,6 +5,7 @@
 # these variables can be overwritten within your .gitlab-ci.yml file
 variables:
     CHECKMARX_DOCKER_IMAGE: "cxflow"
+    CHECKMARX_CLIENT_SECRET: "014DF517-39D1-4453-B7B3-9930C563627C"
     CHECKMARX_BUG_TRACKER: "GitLab"             # If GitLab, will create GitLab Issues.
                                               # It will be set to GitLabMerge automatially during a MR
     CHECKMARX_BUG_TRACKER_IMPL: "$CHECKMARX_BUG_TRACKER"
@@ -16,7 +17,7 @@ variables:
     CHECKMARX_FILTER_CWE: ""                  # create issues filtering on Cwe (i.e. 89, 94)
     CHECKMARX_FILTER_STATUS: ""               # create issues filtering on Status (i.e. "Confirmed")
     CHECKMARX_INCREMENTAL: "false"            # Scan in incremental mode (True/False)
-    CHECKMARX_PRESET: "High and Medium"       # Preset to use during scan
+    CHECKMARX_SCAN_PRESET: "High and Medium"  # Preset to use during scan
     CHECKMARX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"  # Checkmarx Project name (i.e. FrontEnd-Dev)
     CHECKMARX_APP: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"
     CHECKMARX_NAMESPACE: $CI_PROJECT_NAMESPACE
@@ -76,7 +77,7 @@ checkmarx-scan-push:
   script:
     - cat ${CHECKMARX_PRESET}
     - cat ${CHECKMARX_CONFIG} > application.yml
-    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
+    - java -jar /app/cx-flow.jar
       --scan 
       --app="${CHECKMARX_APP}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
@@ -86,7 +87,6 @@ checkmarx-scan-push:
       --cx-project="${CHECKMARX_PROJECT}" 
       --branch="${CI_COMMIT_REF_NAME}"
       --bug-tracker="${CHECKMARX_BUG_TRACKER}"
-      --checkmarx.scan-preset="${CHECKMARX_PRESET}"
       --severity="${CHECKMARX_FILTER_SEVERITY}"
       --cwe="${CHECKMARX_FILTER_CWE}"
       --category="${CHECKMARX_FILTER_CATEGORY}"
