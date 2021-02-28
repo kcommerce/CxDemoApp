@@ -5,6 +5,11 @@ variables:
     CX_FLOW_EXE: "java -jar /app/cx-flow.jar"
     CHECKMARX_INCREMENTAL: "false"
     CX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"
+    CX_FLOW_FILTER_SEVERITY: "Low"
+    CX_FLOW_FILTER_CATEGORY: ""
+    CX_FLOW_FILTER_CWE: ""
+    CX_FLOW_FILTER_STATUS: ""
+    CX_FLOW_FILTER_STATE: ""
     CX_FLOW_ENABLED_VULNERABILITY_SCANNERS: sast
     CX_TEAM: "/CxServer/"
     CX_FLOW_BREAK_BUILD: "false"
@@ -12,7 +17,7 @@ variables:
     GITLAB_ERROR_MERGE: "false"
     PARAMS: ""
 
-cx-scan:
+cx-scan-dashboard:
   stage: test
   only:
     variables:
@@ -37,12 +42,34 @@ cx-scan:
           ${PARAMS}
 
   artifacts:
-     when: on_success
      reports:
        sast: gl-sast-report.json
      paths:
        - gl-sast-report.json
 
+cx-scan:
+  stage: test
+  only:
+    variables:
+      - $CX_FLOW_BUG_TRACKER != "GitLabDashboard"
+    refs:
+      - master
+  image:
+    name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
+    entrypoint: ['']
+  script:
+    - ${CX_FLOW_EXE}
+          --scan 
+          --app="${CI_PROJECT_NAME}" 
+          --namespace="${CI_PROJECT_NAMESPACE}" 
+          --repo-name="${CI_PROJECT_NAME}" 
+          --repo-url="${CI_REPOSITORY_URL}" 
+          --cx-team="${CX_TEAM}" 
+          --cx-project="${CX_PROJECT}" 
+          --branch="${CI_COMMIT_BRANCH}"
+          --spring.profiles.active="${CX_FLOW_ENABLED_VULNERABILITY_SCANNERS}" 
+          --f=. 
+          ${PARAMS}
 
 cx-scan-mr:
   stage: test
