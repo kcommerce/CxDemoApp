@@ -44,7 +44,7 @@ checkmarx-scan-merge-request:
     entrypoint: ['']
   script:
     - cat ${CHECKMARX_CONFIG} > application.yml
-    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
+    - java -jar /app/cx-flow.jar --spring.config.location='https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/application.yml'
       --scan 
       --app="${CHECKMARX_APP}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
@@ -79,7 +79,7 @@ checkmarx-scan-push:
     entrypoint: ['']
   script:
     - cat ${CHECKMARX_CONFIG} > application.yml
-    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
+    - java -jar /app/cx-flow.jar --spring.config.location='https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/application.yml'
       --scan 
       --app="${CHECKMARX_APP}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
@@ -113,7 +113,7 @@ checkmarx-scan-dashboard:
     entrypoint: ['']
   script:
     - cat ${CHECKMARX_CONFIG} > application.yml
-    - java -jar /app/cx-flow.jar --spring.config.location='https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/Checkmarx.gitlab-ci.yml'
+    - java -jar /app/cx-flow.jar --spring.config.location='https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/application.yml'
       --scan 
       --app="${CHECKMARX_APP}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
