@@ -1,9 +1,9 @@
 include: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/Checkmarx.gitlab-ci.yml'
 
 variables:
-    CHECKMARX_BUG_TRACKER: "GitLabDashboard"
+    #CHECKMARX_BUG_TRACKER: "GitLabDashboard"
     CHECKMARX_EXCLUDE_FOLDERS: "src"
     CHECKMARX_PRESET: "Checkmarx Default"
     CHECKMARX_DOCKER_IMAGE: "cx-flow:8e27de2"
-    CHECKMARX_ENABLED_VULNERABILITY_SCANNERS: "sast,sca"
+    #CHECKMARX_ENABLED_VULNERABILITY_SCANNERS: "sast,sca"
 
