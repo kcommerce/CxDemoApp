@@ -16,7 +16,7 @@ variables:
     CX_FLOW_BREAK_BUILD: "false"
     GITLAB_BLOCK_MERGE: "false"
     GITLAB_ERROR_MERGE: "false"
-    PARAMS: ""
+    PARAMS: "--checkmarx.exclude-files='*.java'"
 
 cx-scan-dashboard:
   stage: test
