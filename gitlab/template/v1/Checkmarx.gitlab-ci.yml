@@ -44,8 +44,8 @@ checkmarx-scan-merge-request:
     name: checkmarx/"${CHECKMARX_DOCKER_IMAGE}"
     entrypoint: ['']
   script:
-    #- cat ${CHECKMARX_CONFIG} > application.yml
-    - java -jar /app/cx-flow.jar --spring.config.location="${CHECKMARX_APP_YML_FILE}"
+    - cat ${CHECKMARX_CONFIG} > application.yml
+    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml"
       --scan 
       --app="${CHECKMARX_APP}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
@@ -79,8 +79,8 @@ checkmarx-scan-push:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
   script:
-  #  - cat ${CHECKMARX_CONFIG} > application.yml
-    - java -jar /app/cx-flow.jar --spring.config.location="${CHECKMARX_APP_YML_FILE}"
+    - cat ${CHECKMARX_CONFIG} > application.yml
+    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
       --scan 
       --app="${CHECKMARX_APP}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
@@ -113,7 +113,7 @@ checkmarx-scan-dashboard:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
   script:
-    - cat ${CHECKMARX_APP_YML_FILE}
+    - cat ${CHECKMARX_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
       --scan 
       --app="${CHECKMARX_APP}" 
