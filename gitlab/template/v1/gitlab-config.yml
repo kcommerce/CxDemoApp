@@ -1,6 +1,6 @@
 variables:
     CHECKMARX_DOCKER_IMAGE: "cxflow"
-    CX_FLOW_BUG_TRACKER: "GitLabDashboard"
+    CX_FLOW_BUG_TRACKER: "GitLab"
     CX_FLOW_BUG_TRACKER_IMPL: ${CX_FLOW_BUG_TRACKER}
     CX_FLOW_EXE: "java -jar /app/cx-flow.jar"
     CHECKMARX_INCREMENTAL: "false"
