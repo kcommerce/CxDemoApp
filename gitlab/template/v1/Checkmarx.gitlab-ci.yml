@@ -41,7 +41,7 @@ checkmarx-scan-merge-request:
   script:
     - java -jar /app/cx-flow.jar
       --scan 
-      --app="${CHECKMARX_APP}" 
+      --app="${CI_PROJECT_NAME-$CI_COMMIT_REF_NAME}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
       --repo-name="${CHECKMARX_REPO_NAME}" 
       --repo-url="${CHECKMARX_REPO_URL}" 
@@ -77,7 +77,7 @@ checkmarx-scan-push:
     - cat ${CHECKMARX_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar
       --scan 
-      --app="${CHECKMARX_APP}" 
+      --app="${CI_PROJECT_NAME-$CI_COMMIT_REF_NAME}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
       --repo-name="${CHECKMARX_REPO_NAME}" 
       --repo-url="${CHECKMARX_REPO_URL}" 
@@ -112,7 +112,7 @@ checkmarx-scan-dashboard:
     - cat ${CHECKMARX_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
       --scan 
-      --app="${CHECKMARX_APP}" 
+      --app="${CI_PROJECT_NAME-$CI_COMMIT_REF_NAME}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
       --repo-name="${CHECKMARX_REPO_NAME}" 
       --repo-url="${CHECKMARX_REPO_URL}" 
