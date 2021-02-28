@@ -11,10 +11,10 @@ variables:
     CHECKMARX_APP_YML_FILE: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/application.yml'
     CHECKMARX_EXCLUDE_FILES: ""               # exclude specific file types from the Checkmarx scan
     CHECKMARX_EXCLUDE_FOLDERS: ".git/"        # exclude specific directories from the Checkmarx scan
-    CHECKMARX_SEVERITY: "High"                # create issues filtering on Severity (i.e. "High")
-    CHECKMARX_CATEGORY: ""                    # create issues filtering on Category (i.e. ) 
-    CHECKMARX_CWE: ""                         # create issues filtering on Cwe (i.e. 89, 94)
-    CHECKMARX_STATUS: ""                      # create issues filtering on Status (i.e. "Confirmed")
+    CHECKMARX_FILTER_SEVERITY: "High"         # create issues filtering on Severity (i.e. "High")
+    CHECKMARX_FILTER_CATEGORY: ""             # create issues filtering on Category (i.e. ) 
+    CHECKMARX_FILTER_CWE: ""                  # create issues filtering on Cwe (i.e. 89, 94)
+    CHECKMARX_FILTER_STATUS: ""               # create issues filtering on Status (i.e. "Confirmed")
     CHECKMARX_INCREMENTAL: "false"            # Scan in incremental mode (True/False)
     CHECKMARX_PRESET: "High and Medium"       # Preset to use during scan
     CHECKMARX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"  # Checkmarx Project name (i.e. FrontEnd-Dev)
@@ -51,10 +51,10 @@ checkmarx-scan-merge-request:
       --branch="${CI_COMMIT_REF_NAME}"
       --bug-tracker="GITLABMERGE"
       --checkmarx.scan-preset="${CHECKMARX_PRESET}"
-      --severity="${CHECKMARX_SEVERITY}"
-      --cwe="${CHECKMARX_CWE}"
-      --category="${CHECKMARX_CATEGORY}"
-      --status="${CHECKMARX_STATUS}"
+      --severity="${CHECKMARX_FILTER_SEVERITY}"
+      --cwe="${CHECKMARX_FILTER_CWE}"
+      --category="${CHECKMARX_FILTER_CATEGORY}"
+      --status="${CHECKMARX_FILTER_STATUS}"
       --exclude-files="${CHECKMARX_EXCLUDE_FILES}"
       --exclude-folders="${CHECKMARX_EXCLUDE_FOLDERS}"
       --project-id="${CI_PROJECT_ID}" 
@@ -87,10 +87,10 @@ checkmarx-scan-push:
       --branch="${CI_COMMIT_REF_NAME}"
       --bug-tracker="${CHECKMARX_BUG_TRACKER}"
       --checkmarx.scan-preset="${CHECKMARX_PRESET}"
-      --severity="${CHECKMARX_SEVERITY}"
-      --cwe="${CHECKMARX_CWE}"
-      --category="${CHECKMARX_CATEGORY}"
-      --status="${CHECKMARX_STATUS}"
+      --severity="${CHECKMARX_FILTER_SEVERITY}"
+      --cwe="${CHECKMARX_FILTER_CWE}"
+      --category="${CHECKMARX_FILTER_CATEGORY}"
+      --status="${CHECKMARX_FILTER_STATUS}"
       --exclude-files="${CHECKMARX_EXCLUDE_FILES}"
       --exclude-folders="${CHECKMARX_EXCLUDE_FOLDERS}"
       --project-id="${CI_PROJECT_ID}" 
@@ -121,10 +121,10 @@ checkmarx-scan-dashboard:
       --branch="${CI_COMMIT_REF_NAME}"
       --bug-tracker="${CHECKMARX_BUG_TRACKER}"
       --checkmarx.scan-preset="${CHECKMARX_PRESET}"
-      --severity="${CHECKMARX_SEVERITY}"
-      --cwe="${CHECKMARX_CWE}"
-      --category="${CHECKMARX_CATEGORY}"
-      --status="${CHECKMARX_STATUS}"
+      --severity="${CHECKMARX_FILTER_SEVERITY}"
+      --cwe="${CHECKMARX_FILTER_CWE}"
+      --category="${CHECKMARX_FILTER_CATEGORY}"
+      --status="${CHECKMARX_FILTER_STATUS}"
       --exclude-files="${CHECKMARX_EXCLUDE_FILES}"
       --exclude-folders="${CHECKMARX_EXCLUDE_FOLDERS}"
       --project-id="${CI_PROJECT_ID}" 
