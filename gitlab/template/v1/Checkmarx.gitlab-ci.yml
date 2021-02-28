@@ -16,7 +16,7 @@ variables:
     CHECKMARX_FILTER_CWE: ""                  # create issues filtering on Cwe (i.e. 89, 94)
     CHECKMARX_FILTER_STATUS: ""               # create issues filtering on Status (i.e. "Confirmed")
     CHECKMARX_INCREMENTAL: "false"            # Scan in incremental mode (True/False)
-    CHECKMARX_SCAN_PRESET: "High and Medium"  # Preset to use during scan
+    CHECKMARX_SCAN_PRESET: "Android"  # Preset to use during scan
     CHECKMARX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"  # Checkmarx Project name (i.e. FrontEnd-Dev)
     CHECKMARX_APP: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"
     CHECKMARX_NAMESPACE: $CI_PROJECT_NAMESPACE
