@@ -28,7 +28,7 @@ variables:
     CHECKMARX_BREAK_BUILD: "false"
     GITLAB_BLOCK_MERGE: "false"
     GITLAB_ERROR_MERGE: "false"
-    CHECKMARX_PARAMS: ""                      # list of additional parameters (i.e. )
+    CXFLOW_PARAMS: ""                      # list of additional parameters (i.e. )
 
 checkmarx-scan-merge-request:
   stage: test
@@ -59,7 +59,7 @@ checkmarx-scan-merge-request:
       --spring.profiles.active="${CHECKMARX_ENABLED_VULNERABILITY_SCANNERS}" 
       --f=. 
       --merge-id=${CI_MERGE_REQUEST_IID}
-      ${CHECKMARX_PARAMS}
+      ${CXFLOW_PARAMS}
 
 checkmarx-scan-push:
   stage: test
@@ -84,6 +84,7 @@ checkmarx-scan-push:
       --cx-project="${CHECKMARX_PROJECT}" 
       --branch="${CI_COMMIT_REF_NAME}"
       --bug-tracker="${CHECKMARX_BUG_TRACKER}"
+      --preset="${CHECKMARX_SCAN_PRESET}"
       --filter-severity="${CHECKMARX_FILTER_SEVERITY}"
       --filter-cwe="${CHECKMARX_FILTER_CWE}"
       --filter-category="${CHECKMARX_FILTER_CATEGORY}"
@@ -94,7 +95,7 @@ checkmarx-scan-push:
       --project-id="${CI_PROJECT_ID}" 
       --spring.profiles.active="${CHECKMARX_ENABLED_VULNERABILITY_SCANNERS}" 
       --f=. 
-      ${CHECKMARX_PARAMS}
+      ${CXFLOW_PARAMS}
 
 checkmarx-scan-dashboard:
   stage: test
@@ -127,7 +128,7 @@ checkmarx-scan-dashboard:
       --project-id="${CI_PROJECT_ID}" 
       --spring.profiles.active="${CHECKMARX_ENABLED_VULNERABILITY_SCANNERS}" 
       --f=. 
-      ${CHECKMARX_PARAMS}
+      ${CXFLOW_PARAMS}
   artifacts:
     reports:
       sast: gl-sast-report.json
