@@ -112,8 +112,8 @@ checkmarx-scan-dashboard:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
   script:
-    - cat ${CHECKMARX_CONFIG} > application.yml
-    - java -jar /app/cx-flow.jar --spring.config.location='https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/application.yml'
+    - cat 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/application.yml' > application.yml
+    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
       --scan 
       --app="${CHECKMARX_APP}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
