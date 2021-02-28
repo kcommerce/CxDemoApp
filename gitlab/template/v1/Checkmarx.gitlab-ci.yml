@@ -30,11 +30,6 @@ variables:
     GITLAB_ERROR_MERGE: "false"
     CHECKMARX_PARAMS: ""                      # list of additional parameters (i.e. )
 
-checkmarx:
-  stage: test
-  script:
-    - echo ${CHECKMARX_BUG_TRACKER}
-
 checkmarx-scan-merge-request:
   stage: test
   only:
