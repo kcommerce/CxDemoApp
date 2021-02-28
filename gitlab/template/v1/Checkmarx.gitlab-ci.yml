@@ -51,12 +51,12 @@ checkmarx-scan-merge-request:
       --branch="${CI_COMMIT_REF_NAME}"
       --bug-tracker="GITLABMERGE"
       --checkmarx.scan-preset="${CHECKMARX_PRESET}"
-      --severity="${CHECKMARX_FILTER_SEVERITY}"
-      --cwe="${CHECKMARX_FILTER_CWE}"
-      --category="${CHECKMARX_FILTER_CATEGORY}"
-      --status="${CHECKMARX_FILTER_STATUS}"
-      --exclude-files="${CHECKMARX_EXCLUDE_FILES}"
-      --exclude-folders="${CHECKMARX_EXCLUDE_FOLDERS}"
+      --filter-severity="${CHECKMARX_FILTER_SEVERITY}"
+      --filter-cwe="${CHECKMARX_FILTER_CWE}"
+      --filter-category="${CHECKMARX_FILTER_CATEGORY}"
+      --filter-status="${CHECKMARX_FILTER_STATUS}"
+      --checkmarx.exclude-files="${CHECKMARX_EXCLUDE_FILES}"
+      --checkmarx.exclude-folders="${CHECKMARX_EXCLUDE_FOLDERS}"
       --project-id="${CI_PROJECT_ID}" 
       --spring.profiles.active="${CHECKMARX_ENABLED_VULNERABILITY_SCANNERS}" 
       --f=. 
@@ -74,7 +74,7 @@ checkmarx-scan-push:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
   script:
-    - echo ${CHECKMARX_SCAN_PRESET}
+    - env
     - cat ${CHECKMARX_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar
       --scan 
@@ -86,12 +86,14 @@ checkmarx-scan-push:
       --cx-project="${CHECKMARX_PROJECT}" 
       --branch="${CI_COMMIT_REF_NAME}"
       --bug-tracker="${CHECKMARX_BUG_TRACKER}"
-      --severity="${CHECKMARX_FILTER_SEVERITY}"
-      --cwe="${CHECKMARX_FILTER_CWE}"
-      --category="${CHECKMARX_FILTER_CATEGORY}"
-      --status="${CHECKMARX_FILTER_STATUS}"
-      --exclude-files="${CHECKMARX_EXCLUDE_FILES}"
-      --exclude-folders="${CHECKMARX_EXCLUDE_FOLDERS}"
+      --filter-severity="${CHECKMARX_FILTER_SEVERITY}"
+      --filter-cwe="${CHECKMARX_FILTER_CWE}"
+      --filter-category="${CHECKMARX_FILTER_CATEGORY}"
+      --filter-status="${CHECKMARX_FILTER_STATUS}"
+      --checkmarx.scan-preset="${CHECKMARX_PRESET}"
+      --checkmarx.exclude-files="${CHECKMARX_EXCLUDE_FILES}"
+      --checkmarx.exclude-folders="${CHECKMARX_EXCLUDE_FOLDERS}"
+      --checkmarx.incremental=${CHECKMARX_INCREMENTAL}
       --project-id="${CI_PROJECT_ID}" 
       --spring.profiles.active="${CHECKMARX_ENABLED_VULNERABILITY_SCANNERS}" 
       --f=. 
@@ -120,10 +122,10 @@ checkmarx-scan-dashboard:
       --branch="${CI_COMMIT_REF_NAME}"
       --bug-tracker="${CHECKMARX_BUG_TRACKER}"
       --checkmarx.scan-preset="${CHECKMARX_PRESET}"
-      --severity="${CHECKMARX_FILTER_SEVERITY}"
-      --cwe="${CHECKMARX_FILTER_CWE}"
-      --category="${CHECKMARX_FILTER_CATEGORY}"
-      --status="${CHECKMARX_FILTER_STATUS}"
+      --filter-severity="${CHECKMARX_FILTER_SEVERITY}"
+      --filter-cwe="${CHECKMARX_FILTER_CWE}"
+      --filter-category="${CHECKMARX_FILTER_CATEGORY}"
+      --filter-status="${CHECKMARX_FILTER_STATUS}"
       --exclude-files="${CHECKMARX_EXCLUDE_FILES}"
       --exclude-folders="${CHECKMARX_EXCLUDE_FOLDERS}"
       --project-id="${CI_PROJECT_ID}" 
