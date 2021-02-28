@@ -7,5 +7,6 @@ variables:
     #CHECKMARX_PRESET: "Checkmarx Default"
     CHECKMARX_SCAN_PRESET: "OWASP TOP 10 - 2017"
     CHECKMARX_DOCKER_IMAGE: "cx-flow:8e27de2"
+    PARAMS: "--checkmarx.preset='OWASP TOP 10 - 2017'"
     #CHECKMARX_ENABLED_VULNERABILITY_SCANNERS: "sast,sca"
 
