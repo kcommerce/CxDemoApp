@@ -9,7 +9,6 @@ variables:
     CHECKMARX_BUG_TRACKER: "GitLab"             # If GitLab, will create GitLab Issues.
                                               # It will be set to GitLabMerge automatially during a MR
     CHECKMARX_BUG_TRACKER_IMPL: "$CHECKMARX_BUG_TRACKER"
-    CHECKMARX_APP_YML_FILE: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/application.yml'
     CHECKMARX_EXCLUDE_FILES: ""               # exclude specific file types from the Checkmarx scan
     CHECKMARX_EXCLUDE_FOLDERS: ".git/"        # exclude specific directories from the Checkmarx scan
     CHECKMARX_FILTER_SEVERITY: "High"         # create issues filtering on Severity (i.e. "High")
