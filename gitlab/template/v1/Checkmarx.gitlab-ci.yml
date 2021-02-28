@@ -74,6 +74,7 @@ checkmarx-scan-push:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
   script:
+    - cat ${CHECKMARX_PRESET}
     - cat ${CHECKMARX_CONFIG} > application.yml
     - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
       --scan 
