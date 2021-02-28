@@ -8,6 +8,7 @@ variables:
     CHECKMARX_BUG_TRACKER: "GitLab"             # If GitLab, will create GitLab Issues.
                                               # It will be set to GitLabMerge automatially during a MR
     CHECKMARX_BUG_TRACKER_IMPL: "$CHECKMARX_BUG_TRACKER"
+    CHECKMARX_APP_YML_FILE: "https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/application.yml"
     CHECKMARX_EXCLUDE_FILES: ""               # exclude specific file types from the Checkmarx scan
     CHECKMARX_EXCLUDE_FOLDERS: ".git/"        # exclude specific directories from the Checkmarx scan
     CHECKMARX_SEVERITY: "High"                # create issues filtering on Severity (i.e. "High")
@@ -43,8 +44,8 @@ checkmarx-scan-merge-request:
     name: checkmarx/"${CHECKMARX_DOCKER_IMAGE}"
     entrypoint: ['']
   script:
-    - cat ${CHECKMARX_CONFIG} > application.yml
-    - java -jar /app/cx-flow.jar --spring.config.location='https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/application.yml'
+    #- cat ${CHECKMARX_CONFIG} > application.yml
+    - java -jar /app/cx-flow.jar --spring.config.location="${CHECKMARX_APP_YML_FILE}"
       --scan 
       --app="${CHECKMARX_APP}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
@@ -78,8 +79,8 @@ checkmarx-scan-push:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
   script:
-    - cat ${CHECKMARX_CONFIG} > application.yml
-    - java -jar /app/cx-flow.jar --spring.config.location='https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/application.yml'
+  #  - cat ${CHECKMARX_CONFIG} > application.yml
+    - java -jar /app/cx-flow.jar --spring.config.location="${CHECKMARX_APP_YML_FILE}"
       --scan 
       --app="${CHECKMARX_APP}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
@@ -112,8 +113,8 @@ checkmarx-scan-dashboard:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
   script:
-    - cat "https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/application.yml" > application.yml
-    - java -jar /app/cx-flow.jar --spring.config.location=./application.yml
+  #  - cat "https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/application.yml" > application.yml
+    - java -jar /app/cx-flow.jar --spring.config.location="${CHECKMARX_APP_YML_FILE}"
       --scan 
       --app="${CHECKMARX_APP}" 
       --namespace="${CHECKMARX_NAMESPACE}" 
