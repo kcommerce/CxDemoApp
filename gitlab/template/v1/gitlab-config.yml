@@ -1,5 +1,6 @@
 variables:
     CHECKMARX_DOCKER_IMAGE: "cxflow"
+    CHECKMARX_BUG_TRACKER: "GitLabDashboard"
     CX_FLOW_EXE: "java -jar /app/cx-flow.jar"
     CHECKMARX_INCREMENTAL: "false"
     CX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"
@@ -10,11 +11,10 @@ variables:
     GITLAB_ERROR_MERGE: "false"
     PARAMS: ""
 
-stages:
-  - scan
-
 cx-scan:
-  stage: scan
+  stage: test
+  rules:
+      if: $CHECKMARX_BUG_TRACKER == "GitLabDashboard"
   only:
     - master
   variables:
@@ -46,7 +46,7 @@ cx-scan:
 
 
 cx-scan-mr:
-  stage: scan
+  stage: test
   only:
     - merge_requests
   variables:
