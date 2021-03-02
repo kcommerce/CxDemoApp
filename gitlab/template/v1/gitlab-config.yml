@@ -14,6 +14,12 @@ variables:
     CX_FLOW_ENABLED_VULNERABILITY_SCANNERS: sast
     CX_TEAM: "/CxServer/"
     CX_FLOW_BREAK_BUILD: "false"
+    SCA_FILTER_SEVERITY: ""
+    SCA_FILTER_SCORE: ""
+    SCA_THRESHOLDS_SCORE: ""
+    SCA_TEAM: ""
+    SCA_ENABLEDZIPSCAN: "false"
+    SCA_INCLUDESOURCES: "true"
     GITLAB_BLOCK_MERGE: "false"
     GITLAB_ERROR_MERGE: "false"
     PARAMS: "--checkmarx.exclude-files='*.java'"
