@@ -5,9 +5,8 @@ include: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/
 variables:
     #CHECKMARX_BUG_TRACKER: "GitLabDashboard"
     CHECKMARX_EXCLUDE_FOLDERS: "src/"
-    #CHECKMARX_PRESET: "Checkmarx Default"
     CHECKMARX_SCAN_PRESET: "OWASP TOP 10 - 2017"
-    CHECKMARX_DOCKER_IMAGE: "cx-flow:8e27de2"
+    CHECKMARX_DOCKER_IMAGE: "cx-flow:b54a1bf"
     PARAMS: "--checkmarx.preset='OWASP TOP 10 - 2017'"
-    #CHECKMARX_ENABLED_VULNERABILITY_SCANNERS: "sast,sca"
+    CX_FLOW_ENABLED_VULNERABILITY_SCANNERS: "sast,sca"
 
