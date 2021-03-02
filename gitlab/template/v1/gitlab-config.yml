@@ -24,13 +24,11 @@ variables:
     GITLAB_ERROR_MERGE: "false"
     PARAMS: "--checkmarx.exclude-files='*.java'"
 
-cx-scan-dashboard:
+checkmarx-scan-security-dashboard:
   stage: test
-  only:
-    variables:
-      - $CX_FLOW_BUG_TRACKER == "GitLabDashboard"
-    refs:
-      - master
+  rules:
+    - if: $CX_FLOW_BUG_TRACKER == "GitLabDashboard"
+    - if: '$CI_COMMIT_BRANCH == "master"'
   image:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
@@ -54,13 +52,11 @@ cx-scan-dashboard:
      paths:
        - gl-sast-report.json
 
-cx-scan:
+checkmarx-scan:
   stage: test
-  only:
-    variables:
-      - $CX_FLOW_BUG_TRACKER != "GitLabDashboard"
-    refs:
-      - master
+  rules:
+    - if: $CX_FLOW_BUG_TRACKER != "GitLabDashboard"
+    - if: '$CI_COMMIT_BRANCH == "master"'
   image:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
@@ -78,12 +74,10 @@ cx-scan:
           --f=. 
           ${PARAMS}
 
-cx-scan-mr:
+checkmarx-scan-mr:
   stage: test
-  only:
-    - merge_requests
-  variables:
-      GITLAB_TOKEN: $GITLAB_TOKEN
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   image:   
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
