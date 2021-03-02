@@ -44,12 +44,10 @@ checkmarx-scan-security-dashboard:
           --spring.profiles.active="${CX_FLOW_ENABLED_VULNERABILITY_SCANNERS}" 
           --f=. 
           ${PARAMS}
-
   artifacts:
      reports:
        sast: gl-sast-report.json
-     paths:
-       - gl-sast-report.json
+       dependency_scanning: gl-dependency-scanning-report.json
 
 checkmarx-scan:
   stage: test
