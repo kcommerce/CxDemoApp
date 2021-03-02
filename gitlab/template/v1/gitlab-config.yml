@@ -1,11 +1,16 @@
+#
+# Include this file in your .gitlab-ci.yml file to automate & integrate Checkmarx security scans.
+#
+# These variables can be overridden in your .gitlab-ci.yml file or as envionrment variables.
+#
+
 variables:
     CHECKMARX_DOCKER_IMAGE: "cxflow"
     CX_FLOW_BUG_TRACKER: "GitLab"
     CX_FLOW_BUG_TRACKER_IMPL: ${CX_FLOW_BUG_TRACKER}
     CX_FLOW_EXE: "java -jar /app/cx-flow.jar"
-    CHECKMARX_INCREMENTAL: "false"
     CX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"
-    CHECKMARX_EXCLUDE_FILES: "*.java"
+    CHECKMARX_EXCLUDE_FILES: ""
     CHECKMARX_SCAN_PRESET: "Checkmarx Default"
     CX_FLOW_FILTER_SEVERITY: "High"
     CX_FLOW_FILTER_CATEGORY: ""
@@ -19,11 +24,9 @@ variables:
     SCA_FILTER_SCORE: ""
     SCA_THRESHOLDS_SCORE: ""
     SCA_TEAM: ""
-    SCA_ENABLEDZIPSCAN: "false"
-    SCA_INCLUDESOURCES: "true"
     GITLAB_BLOCK_MERGE: "false"
     GITLAB_ERROR_MERGE: "false"
-    PARAMS: "--checkmarx.exclude-files='*.java'"
+    PARAMS: ""
 
 checkmarx-scan-security-dashboard:
   stage: test
@@ -32,6 +35,8 @@ checkmarx-scan-security-dashboard:
   image:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
+  variables:
+    CHECKMARX_INCREMENTAL: "false"
   script:
     - ${CX_FLOW_EXE}
           --scan 
@@ -57,6 +62,8 @@ checkmarx-scan:
   image:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
+  variables:
+    CHECKMARX_INCREMENTAL: "false"
   script:
     - ${CX_FLOW_EXE}
           --scan 
@@ -78,6 +85,8 @@ checkmarx-scan-mr:
   image:   
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
+  variables:
+    CHECKMARX_INCREMENTAL: "true"
   script:
     - ${CX_FLOW_EXE}
           --scan 
