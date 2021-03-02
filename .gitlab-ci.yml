@@ -3,6 +3,7 @@
 include: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/gitlab/template/v1/gitlab-config.yml'
 
 variables:
+    #
     #CHECKMARX_BUG_TRACKER: "GitLabDashboard"
     CHECKMARX_EXCLUDE_FOLDERS: "src/"
     CHECKMARX_SCAN_PRESET: "OWASP TOP 10 - 2017"
