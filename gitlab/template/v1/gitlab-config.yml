@@ -5,7 +5,7 @@ variables:
     CX_FLOW_EXE: "java -jar /app/cx-flow.jar"
     CHECKMARX_INCREMENTAL: "false"
     CX_PROJECT: "$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME"
-    CHECKMARX_EXCLUDE-FILES: "*.java"
+    CHECKMARX_EXCLUDEFILES: "*.java"
     CX_FLOW_FILTER_SEVERITY: "High"
     CX_FLOW_FILTER_CATEGORY: ""
     CX_FLOW_FILTER_CWE: ""
