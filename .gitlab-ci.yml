@@ -1,4 +1,4 @@
-include: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/develop/templates/gitlab/v2/Checkmarx.gitlab-ci.yml'
+include: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/template.yml'
 
 variables:
     #
