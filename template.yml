@@ -67,6 +67,7 @@ checkmarx-scan:
   variables:
     CHECKMARX_INCREMENTAL: "false"
   script:
+    - echo ${CI_COMMIT_BRANCH}
     - ${CX_FLOW_EXE}
           --scan 
           --app="${CI_PROJECT_NAME}" 
