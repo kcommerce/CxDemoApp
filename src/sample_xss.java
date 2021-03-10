@@ -28,6 +28,8 @@ public class BookDetail_jsp extends HttpJspBase {
 
 		String userName = request.getParameter("Name"); 
 
+		// this is a comment
+		
 		printSanitizedName(userName);
 	}
 
