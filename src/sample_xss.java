@@ -12,8 +12,8 @@ public class BookDetail_jsp extends HttpJspBase {
 
 	private static void printSanitizedName (String str) {
 
-		String sanitizedUserData = Security.validName(str);
-		//String sanitizedUserData = escapeHtml4(str);
+		//String sanitizedUserData = Security.validName(str);
+		String sanitizedUserData = escapeHtml4(str);
 		out.println (sanitizedUserData);
 	}
 
