@@ -2,7 +2,7 @@ include: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/pr-edit-gitlab
 
 variables:
     CHECKMARX_DOCKER_IMAGE: "cx-flow:ed5a7fd"
-    CX_FLOW_ENABLED_VULNERABILITY_SCANNERS: "sast,sca"
-    SCA_TEAM: "/CxServer/SCA-PM/Champions/jbrots"
-    SCA_FILTER_SEVERITY: "High"
+    #CX_FLOW_ENABLED_VULNERABILITY_SCANNERS: "sast,sca"
+    #SCA_TEAM: "/CxServer/SCA-PM/Champions/jbrots"
+    #SCA_FILTER_SEVERITY: "High"
 
