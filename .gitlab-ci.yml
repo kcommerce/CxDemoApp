@@ -4,3 +4,8 @@ variables:
     CHECKMARX_DOCKER_IMAGE: "cx-flow:ed5a7fd"
     CX_FLOW_ENABLED_VULNERABILITY_SCANNERS: "sast, sca"
     SCA_FILTER_SEVERITY: "high"
+
+.checkmarx:
+    extends: checkmarx-scan
+    script: 
+        - echo "hello"
