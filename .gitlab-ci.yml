@@ -7,5 +7,5 @@ variables:
 
 .checkmarx:
     extends: checkmarx-scan
-    script: 
+    before_script: 
         - echo "hello"
