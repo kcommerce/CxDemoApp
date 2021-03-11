@@ -5,7 +5,6 @@ variables:
     CX_FLOW_ENABLED_VULNERABILITY_SCANNERS: "sast, sca"
     SCA_FILTER_SEVERITY: "high"
 
-.checkmarx:
-    extends: checkmarx-scan
+checkmarx-scan:
     before_script: 
         - echo "hello"
