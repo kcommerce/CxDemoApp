@@ -1,10 +1,7 @@
-include: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/develop/templates/gitlab/v2/Checkmarx.gitlab-ci.yml'
+include: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/master/templates/gitlab/v2/Checkmarx.gitlab-ci.yml'
 
 variables:
-    CHECKMARX_DOCKER_IMAGE: "cx-flow:ed5a7fd"
     CX_FLOW_ENABLED_VULNERABILITY_SCANNERS: "sast, sca"
     SCA_FILTER_SEVERITY: "high"
+    PARAMS: "--codebashing.codebashingApiUrl='https://api.codebashing.com/lessons' --codebashing.tenantBaseUrl='https://learn.codebashing.com/' --codebashing.apiSecret=fd894be6da459e2ebe0a1a4c3edbc8e4"
 
-checkmarx-scan:
-    before_script: 
-        - echo "hello"
