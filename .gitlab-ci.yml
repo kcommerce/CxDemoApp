@@ -3,5 +3,5 @@ include: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/master/templat
 variables:
     CX_FLOW_ENABLED_VULNERABILITY_SCANNERS: "sast, sca"
     SCA_FILTER_SEVERITY: "high"
-    PARAMS: "--codebashing.codebashingApiUrl=https://api.codebashing.com/ --codebashing.tenantBaseUrl=https://checkmarx-demo.codebashing.com/ --codebashing.apiSecret=${CODEBASHING_TOKEN}"
+    PARAMS: "--codebashing.codebashingApiUrl=https://api.codebashing.com/ --codebashing.tenantBaseUrl=https://checkmarx-demo.codebashing.com/ --codebashing.apiSecret=${CODEBASHING_KEY}"
 
