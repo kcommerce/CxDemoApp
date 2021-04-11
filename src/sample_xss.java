@@ -36,7 +36,7 @@ public class BookDetail_jsp extends HttpJspBase {
 
 		String userAccount = request.getParameter("Account"); 
 
-		//printSanitizedName(userAccount);
+		printSanitizedName(userAccount);
 	}
 
 	public static void loadNumber () {
