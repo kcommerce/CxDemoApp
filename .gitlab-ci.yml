@@ -1,4 +1,1 @@
 include: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/master/templates/gitlab/v2/Checkmarx.gitlab-ci.yml'
-
-variables:
-    CHECKMARX_SCAN_PRESET: "Checkmarx Express"
