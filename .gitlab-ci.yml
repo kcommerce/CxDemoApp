@@ -2,7 +2,7 @@ include:
   - remote: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/kics.yml'
   - remote: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/master/templates/gitlab/v2/Checkmarx.gitlab-ci.yml'
 
-#test
+#test1
 
 variables:
     CHECKMARX_PRESET: "High and Medium"
