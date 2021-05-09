@@ -22,7 +22,9 @@ variables:
 
 kics-scan:
   stage: test
-  image: checkmarx/kics
+  image: 
+    name: checkmarx/kics
+    entrypoint: ['']
   script:
     - kics scan -q /usr/bin/assets/queries -p ${PWD} -o ${PWD}/kics-results.json
   artifacts:
@@ -32,7 +34,9 @@ kics-scan:
 
 kics-results:
   stage: .post
-  image: checkmarx/kics
+  image: 
+    name: checkmarx/kics
+    entrypoint: ['']
   before_script:
     - export TOTAL_SEVERITY_COUNTER=`grep '"total_counter"':' ' kics-results.json | awk {'print $2'}`
     - export SEVERITY_COUNTER_HIGH=`grep '"HIGH"':' ' kics-results.json | awk {'print $2'} | sed 's/.$//'`
