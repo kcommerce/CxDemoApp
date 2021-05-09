@@ -1,8 +1,8 @@
-#include: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/master/templates/gitlab/v2/Checkmarx.gitlab-ci.yml'
 include:
-  - remote: https://raw.githubusercontent.com/checkmarx/kics/master/examples/gitlab/KICS.v1.gitlabci.yaml
+  - remote: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/master/templates/gitlab/v2/Checkmarx.gitlab-ci.yml'
+  - remote: 'https://raw.githubusercontent.com/checkmarx/kics/master/examples/gitlab/KICS.v1.gitlabci.yaml'
 
 
-#variables:
-#    CHECKMARX_PRESET: "High and Medium"
-#    CHECKMARX_EXCLUDE_FOLDERS: ".git"
+variables:
+    CHECKMARX_PRESET: "High and Medium"
+    CHECKMARX_EXCLUDE_FOLDERS: ".git"
