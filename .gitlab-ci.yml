@@ -1,5 +1,5 @@
 include:
-  - remote: 'https://raw.githubusercontent.com/checkmarx/kics/master/examples/gitlab/KICS.v1.gitlabci.yaml'
+  - remote: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/kics.yml'
   - remote: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/master/templates/gitlab/v2/Checkmarx.gitlab-ci.yml'
 
 
