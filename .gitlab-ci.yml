@@ -4,4 +4,5 @@ include:
 
 variables:
     CHECKMARX_PRESET: "High and Medium"
-    CHECKMARX_EXCLUDE_FOLDERS: ".git"
+    CHECKMARX_EXCLUDE_FOLDERS: ".git/"
+    KICS_BLOCK_ON_HIGH: "false"
