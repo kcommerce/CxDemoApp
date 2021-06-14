@@ -1,8 +1,12 @@
 include:
 #  - remote: 'https://gitlab.com/CxDemoGroup/CxDemoApp/-/raw/master/kics.yml'
-  - remote: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/master/templates/gitlab/v2/Checkmarx.gitlab-ci.yml'
+#  - remote: 'https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/master/templates/gitlab/v2/Checkmarx.gitlab-ci.yml'
 
-variables:
-    CHECKMARX_PRESET: "High and Medium"
-    CHECKMARX_EXCLUDE_FOLDERS: ".git/"
-    KICS_BLOCK_ON_HIGH: "false"
+  #james test new v3
+  - Checkmarx.gitlab-ci.yml
+
+
+#variables:
+ #   CHECKMARX_PRESET: "High and Medium"
+ #   CHECKMARX_EXCLUDE_FOLDERS: ".git/"
+ #   KICS_BLOCK_ON_HIGH: "false"
