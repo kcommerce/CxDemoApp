@@ -72,7 +72,7 @@ checkmarx-scan:
   variables:
     CHECKMARX_INCREMENTAL: "false"
   script:
-    - echo env
+    - env
     - ${CX_FLOW_EXE}
           --scan 
           --app="${CI_PROJECT_NAME}" 
