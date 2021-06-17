@@ -96,7 +96,7 @@ checkmarx-scan-mr:
   variables:
     CHECKMARX_INCREMENTAL: "true"
   script:
-    - echo env
+    - env
     - ${CX_FLOW_EXE}
           --scan 
           --bug-tracker="GITLABMERGE"
