@@ -7,8 +7,8 @@
 #
 
 variables:
-    GITLAB_URL: "$(echo $CI_PROJECT_URL | cut -d'/' -f1,2,3)"
-    GITLAB_API_URL: "$(echo $CI_PROJECT_URL | cut -d'/' -f1,2,3)/api/v4"
+    GITLAB_URL: ${CI_SERVER_URL}
+    GITLAB_API_URL: '${GITLAB_URL}/api/v4'
     CHECKMARX_DOCKER_IMAGE: "cx-flow"
     CX_FLOW_BUG_TRACKER: "GitLab"
     CX_FLOW_BUG_TRACKER_IMPL: ${CX_FLOW_BUG_TRACKER}
@@ -40,7 +40,7 @@ variables:
 checkmarx-scan-security-dashboard:
   stage: test
   rules:
-    - if: '$CX_FLOW_BUG_TRACKER == "GitLabDashboard" && $CI_COMMIT_BRANCH == $COMMIT_BRANCH'
+    - if: '$CX_FLOW_BUG_TRACKER == "GitLabDashboard" && $CI_COMMIT_BRANCH == ${COMMIT_BRANCH}'
   image:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
@@ -68,7 +68,7 @@ checkmarx-scan-security-dashboard:
 checkmarx-scan:
   stage: test
   rules:
-  #  - if: '$CX_FLOW_BUG_TRACKER != "GitLabDashboard" && $CI_COMMIT_BRANCH == $COMMIT_BRANCH'
+    - if: '$CX_FLOW_BUG_TRACKER != "GitLabDashboard" && $CI_COMMIT_BRANCH == ${COMMIT_BRANCH}'
   image:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
