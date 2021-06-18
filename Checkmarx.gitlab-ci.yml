@@ -120,7 +120,7 @@ checkmarx-scan-mr:
           ${PARAMS}
 
 checkmarx-scan-security-dashboard-on-mr:
-  stage: test
+  stage: post-test
   needs: ["checkmarx-scan-mr"]
   rules:
     - if: '$SECURITY_DASHBOARD_ON_MR == "true"'
