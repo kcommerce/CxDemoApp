@@ -7,7 +7,7 @@
 #
 
 variables:
-    GITLAB_URL: "$CI_SERVER_URL"
+    GITLAB_URL: "${CI_SERVER_URL}"
     GITLAB_API_URL: ${GITLAB_URL}/api/v4
     CHECKMARX_DOCKER_IMAGE: "cx-flow"
     CX_FLOW_BUG_TRACKER: "GitLab"
@@ -34,7 +34,7 @@ variables:
     SCA_TEAM: ""
     GITLAB_BLOCK_MERGE: "false"
     GITLAB_ERROR_MERGE: "false"
-    DEFAULT_BRANCH: "$CI_DEFAULT_BRANCH"
+    DEFAULT_BRANCH: "${CI_DEFAULT_BRANCH}"
     PARAMS: ""
 
 checkmarx-scan-security-dashboard:
