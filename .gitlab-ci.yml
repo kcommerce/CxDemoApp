@@ -5,8 +5,8 @@ include:
   #james test new v3
   - Checkmarx.gitlab-ci.yml
 
-
-#variables:
+variables:
+  SECURITY_DASHBOARD_ON_MR: "true"
  #   CHECKMARX_PRESET: "High and Medium"
  #   CHECKMARX_EXCLUDE_FOLDERS: ".git/"
  #   KICS_BLOCK_ON_HIGH: "false"
