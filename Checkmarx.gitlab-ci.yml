@@ -120,12 +120,11 @@ checkmarx-scan-mr:
           ${PARAMS}
 
 checkmarx-scan-security-dashboard-on-mr:
-  stage: post-test
+  stage: .post
   needs: ["checkmarx-scan-mr"]
   rules:
     - if: '$SECURITY_DASHBOARD_ON_MR == "true"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
   image:   
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
@@ -147,3 +146,7 @@ checkmarx-scan-security-dashboard-on-mr:
           --merge-id="${CI_MERGE_REQUEST_IID}" 
           --spring.profiles.active="${CX_FLOW_ENABLED_VULNERABILITY_SCANNERS}" 
           ${PARAMS}
+  artifacts:
+    reports:
+      sast: gl-sast-report.json
+      dependency_scanning: gl-dependency-scanning-report.json
