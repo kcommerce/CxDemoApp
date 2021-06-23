@@ -9,8 +9,8 @@ include:
 variables:
   SECURITY_DASHBOARD_ON_MR: 'true'
   CHECKMARX_SETTINGS_OVERRIDE: 'true'
-  CHECKMARX_PRESET: 'High and Medium'
-  PARAMS: "--checkmarx.settings-override=true"
+  CHECKMARX_SCAN_PRESET: 'High and Medium'
+  #PARAMS: "--checkmarx.settings-override=true"
 stages:
 - test
 sast:
