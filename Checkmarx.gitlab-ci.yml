@@ -124,7 +124,7 @@ checkmarx-scan-security-dashboard-on-mr:
   needs: ["checkmarx-scan-mr"]
   rules:
     - if: '$SECURITY_DASHBOARD_ON_MR == "true"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '${CI_PIPELINE_SOURCE} == "merge_request_event"'
   image:   
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
