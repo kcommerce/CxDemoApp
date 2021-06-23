@@ -8,6 +8,8 @@ include:
 - template: Security/SAST.gitlab-ci.yml
 variables:
   SECURITY_DASHBOARD_ON_MR: 'true'
+  CHECKMARX_SETTINGS_OVERRIDE: 'true'
+  CHECKMARX_PRESET: 'High and Medium'
 stages:
 - test
 sast:
