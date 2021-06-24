@@ -41,7 +41,8 @@ variables:
 checkmarx-scan-security-dashboard:
   stage: test
   rules:
-    - if: '$CX_FLOW_BUG_TRACKER == "GitLabDashboard" && $CI_COMMIT_BRANCH == "master"'
+    - if: '$CX_FLOW_BUG_TRACKER == "GitLabDashboard"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
   image:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
@@ -71,7 +72,8 @@ checkmarx-scan:
   rules:
     #- if: '$CX_FLOW_BUG_TRACKER != "GitLabDashboard" && $CI_COMMIT_BRANCH == $DEFAULT_BRANCH'
     #- if: '$CX_FLOW_BUG_TRACKER != "GitLabDashboard" && $CI_COMMIT_BRANCH == ${DEFAULT_BRANCH}'
-    - if: '$CX_FLOW_BUG_TRACKER != "GitLabDashboard" && $CI_COMMIT_BRANCH == "master"'
+    - if: '$CX_FLOW_BUG_TRACKER != "GitLabDashboard"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
   image:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
