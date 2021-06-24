@@ -124,7 +124,7 @@ checkmarx-scan-security-dashboard-on-mr:
   image:   
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
-    variables:
+  variables:
       CHECKMARX_INCREMENTAL: "true"
   script:
     - env
