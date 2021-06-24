@@ -129,7 +129,7 @@ checkmarx-scan-security-dashboard-on-mr:
   script:
     - env
     - ${CX_FLOW_EXE}
-          --project
+          --batch
           --bug-tracker="GITLABDASHBOARD"
           --app="${CI_PROJECT_NAME}" 
           --namespace="${CI_PROJECT_NAMESPACE}"
