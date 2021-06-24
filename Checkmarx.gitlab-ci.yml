@@ -131,6 +131,7 @@ checkmarx-scan-security-dashboard-on-mr:
     - ${CX_FLOW_EXE}
           --batch
           --bug-tracker="GITLABDASHBOARD"
+          --bug-tracker-impl="GITLABDASHBOARD"
           --app="${CI_PROJECT_NAME}" 
           --namespace="${CI_PROJECT_NAMESPACE}"
           --repo-name="${CI_PROJECT_NAME}"
