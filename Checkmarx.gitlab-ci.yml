@@ -47,7 +47,6 @@ checkmarx-scan-security-dashboard:
   variables:
     CHECKMARX_INCREMENTAL: "false"
   script:
-    - env
     - ${CX_FLOW_EXE}
           --scan 
           --app="${CI_PROJECT_NAME}" 
@@ -75,7 +74,6 @@ checkmarx-scan:
   variables:
     CHECKMARX_INCREMENTAL: "false"
   script:
-    - env
     - ${CX_FLOW_EXE}
           --scan 
           --app="${CI_PROJECT_NAME}" 
@@ -99,7 +97,6 @@ checkmarx-scan-mr:
   variables:
     CHECKMARX_INCREMENTAL: "true"
   script:
-    - env
     - ${CX_FLOW_EXE}
           --scan 
           --bug-tracker="GITLABMERGE"
@@ -128,7 +125,6 @@ checkmarx-scan-security-dashboard-on-mr:
       CX_FLOW_BUG_TRACKER: "GitLabDashboard"
       CX_FLOW_BUG_TRACKER_IMPL: ${CX_FLOW_BUG_TRACKER}
   script:
-    - env
     - ${CX_FLOW_EXE}
           --batch
           --cx-team="${CX_TEAM}" 
