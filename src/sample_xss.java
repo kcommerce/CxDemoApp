@@ -50,7 +50,7 @@ public class BookDetail_jsp extends HttpJspBase {
 
 		String userField = request.getParameter("Field"); 
 
-		//printSanitizedName(userField);
+		printSanitizedName(userField);
 	}
 
 	public static void loadComments () {
