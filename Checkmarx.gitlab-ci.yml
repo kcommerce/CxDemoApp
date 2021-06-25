@@ -130,8 +130,8 @@ checkmarx-scan-security-dashboard-on-mr:
     - env
     - ${CX_FLOW_EXE}
           --batch
-          --bug-tracker="GITLABDASHBOARD"
-          --bug-tracker-impl="GITLABDASHBOARD"
+          --bug-tracker="Sarif"
+          --bug-tracker-impl="Sarif"
           --cx-team="${CX_TEAM}" 
           --cx-project="${CX_PROJECT}" 
           --spring.profiles.active="${CX_FLOW_ENABLED_VULNERABILITY_SCANNERS}" 
