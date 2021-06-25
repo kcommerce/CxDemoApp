@@ -125,13 +125,12 @@ checkmarx-scan-security-dashboard-on-mr:
     name: checkmarx/${CHECKMARX_DOCKER_IMAGE}
     entrypoint: ['']
   variables:
-      CHECKMARX_INCREMENTAL: "true"
+      CX_FLOW_BUG_TRACKER: "GitLabDashboard"
+      CX_FLOW_BUG_TRACKER_IMPL: ${CX_FLOW_BUG_TRACKER}
   script:
     - env
     - ${CX_FLOW_EXE}
           --batch
-          --bug-tracker="Sarif"
-          --bug-tracker-impl="Sarif"
           --cx-team="${CX_TEAM}" 
           --cx-project="${CX_PROJECT}" 
           --spring.profiles.active="${CX_FLOW_ENABLED_VULNERABILITY_SCANNERS}" 
