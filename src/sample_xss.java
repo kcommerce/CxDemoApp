@@ -57,7 +57,7 @@ public class BookDetail_jsp extends HttpJspBase {
 
 		String userComment = request.getParameter("Comment"); 
 
-		printSanitizedName(userComment);
+		//printSanitizedName(userComment);
 	}
 
 	public static void loadLink () {
