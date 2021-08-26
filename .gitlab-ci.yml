@@ -9,7 +9,4 @@ include:
 variables:
   CHECKMARX_SCAN_PRESET: 'High and Medium'
   PARAMS: "--checkmarx.settings-override=true"
-stages:
-- test
-sast:
-  stage: test
+
