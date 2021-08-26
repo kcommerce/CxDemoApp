@@ -4,11 +4,9 @@
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 include:
-- Checkmarx.gitlab-ci.yml
-- template: Security/SAST.gitlab-ci.yml
+- https://raw.githubusercontent.com/checkmarx-ltd/cx-flow/develop/templates/gitlab/v3/Checkmarx.gitlab-ci.yml
+
 variables:
-  SECURITY_DASHBOARD_ON_MR: 'true'
-  CHECKMARX_SETTINGS_OVERRIDE: 'true'
   CHECKMARX_SCAN_PRESET: 'High and Medium'
   PARAMS: "--checkmarx.settings-override=true"
 stages:
