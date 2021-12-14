@@ -93,5 +93,6 @@ public class BookDetail_jsp extends HttpJspBase {
 		String userInfo = request.getParameter("xxxInfo"); 
 
 		printSanitizedName(userInfo);
+		System.out.println("password");
 	}
 }
