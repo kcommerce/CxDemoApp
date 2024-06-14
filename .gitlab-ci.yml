@@ -4,3 +4,4 @@ include: 'https://raw.githubusercontent.com/Checkmarx/ci-cd-integrations/main/Gi
 variables:
       CX_ADDITIONAL_PARAMS: "--debug --sast-preset-name 'OWASP Top 10 - 2021' --sast-incremental " 
 
+
